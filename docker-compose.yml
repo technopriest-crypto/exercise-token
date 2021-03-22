@@ -44,7 +44,7 @@ services:
       - SECURE_COOKIES=false
       - GAS_UPDATER_ENABLED=true
       - ALLOW_ORIGINS=*
-      - ETH_URL=https://kovan.infura.io/v3/8cefcaa06dad492f8e954e9a1d9b16d9
+      - ETH_URL=wss://kovan.infura.io/ws/v3/8cefcaa06dad492f8e954e9a1d9b16d9
       - DATABASE_URL=postgresql://postgres:postgres@postgresdb.dev:5432/chainlink_kovan?sslmode=disable
 
     volumes:
