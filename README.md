@@ -19,3 +19,6 @@
   Or To call a shell inside web container:
 
   ```docker exec -it web /bin/bash```
+
+
+mkdir data && mkdir data/chainlink-kovan
