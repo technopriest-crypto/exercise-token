@@ -49,8 +49,12 @@ services:
 
     volumes:
       - ./data/chainlink-kovan/:/chainlink
+      - ./password.txt:/chainlink/password:ro
+      - ./api.txt:/chainlink/api:ro
+
     ports:
      - "6688:6688"
+    depends_on: [ postgresdb ]
     networks:
       - dev
 
