@@ -4,28 +4,46 @@ services:
   # ------------------------------- WFE --------------------------------
   web:
     container_name: web
-    build:
-      context: .
-      dockerfile: ./web/Dockerfile.dev
+    image: "python:3"
+    entrypoint: "tail -f /dev/null"
+    working_dir: /app
     ports:
      - "8000:8000"
     volumes:
       - ./web/:/app/
-
     networks:
       - dev
 
-
+  # ------------------------------- DATABASE --------------------------------
   postgresdb:
     container_name: postgresdb
     image: "postgres:13"
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=chainlink_kovan
     ports:
      - "5432:5432"
     networks:
       - dev
+
+  # ------------------------------- CHAINLINK NODE --------------------------------
+
+  chainlink:
+    container_name: chainlink
+    image: "smartcontract/chainlink:latest"
+    entrypoint: chainlink
+    command: local n -p /chainlink/password
+    env_file:
+      - chainlink_kovan.env  
+    volumes:
+      - ./data/chainlink-kovan/:/chainlink
+    ports:
+     - "6688:6688"
+    networks:
+      - dev
+
+
 
 
 networks:
