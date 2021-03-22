@@ -33,7 +33,7 @@ services:
     container_name: chainlink
     image: "smartcontract/chainlink:latest"
     entrypoint: chainlink
-    command: local n -p /chainlink/password
+    command: local n -p /chainlink/password -a /chainlink/api
     environment:
       - ROOT=/chainlink
       - LOG_LEVEL=debug
@@ -49,8 +49,6 @@ services:
 
     volumes:
       - ./data/chainlink-kovan/:/chainlink
-      - ./password.txt:/chainlink/password:ro
-      - ./api.txt:/chainlink/api:ro
 
     ports:
      - "6688:6688"
