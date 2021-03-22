@@ -22,3 +22,7 @@
 
 
 mkdir data && mkdir data/chainlink-kovan
+
+echo "user@example.com" > ./data/chainlink-rinkeby/api
+echo "password" >> ./data/chainlink-rinkeby/api
+echo "my_wallet_password" > ./data/chainlink-rinkeby/password

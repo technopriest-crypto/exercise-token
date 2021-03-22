@@ -56,7 +56,18 @@ services:
     networks:
       - dev
 
-
+  # ------------------------------- External_adapter --------------------------------
+  external_adapter:
+    container_name: external_adapter
+    image: "python:3"
+    entrypoint: "tail -f /dev/null"
+    working_dir: /app
+    ports:
+     - "8001:8001"
+    volumes:
+      - ./external_adapter/:/app/
+    networks:
+      - dev
 
 
 networks:
