@@ -2,4 +2,6 @@
 
 ## Development environment
 
-"""docker-compose up -d"""
+```docker network create dev```
+
+```docker-compose up -d```
