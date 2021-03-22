@@ -1,0 +1,14 @@
+FROM python:3
+
+ARG USER_ID
+ARG GROUP_ID
+
+RUN \
+  apt-get update -y && \
+  apt-get install sudo nano vim -y
+
+USER user
+
+WORKDIR /app
+
+ENTRYPOINT tail -f /dev/null

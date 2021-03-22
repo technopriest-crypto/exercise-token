@@ -1,0 +1,34 @@
+version: '3'
+services:
+
+  # ------------------------------- WFE --------------------------------
+  web:
+    container_name: web
+    build:
+      context: .
+      dockerfile: ./web/Dockerfile.dev
+    ports:
+     - "8000:8000"
+    volumes:
+      - ./web/:/app/
+
+    networks:
+      - dev
+
+
+  postgresdb:
+    container_name: postgresdb
+    image: "postgres:13"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+     - "5432:5432"
+    networks:
+      - dev
+
+
+networks:
+  dev:
+    external:
+      name: dev
