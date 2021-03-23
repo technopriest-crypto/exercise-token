@@ -56,6 +56,7 @@ services:
     networks:
       - dev
 
+
   # ------------------------------- External_adapter --------------------------------
   external_adapter:
     container_name: external_adapter
@@ -66,6 +67,20 @@ services:
      - "8001:8001"
     volumes:
       - ./external_adapter/:/app/
+    networks:
+      - dev
+
+
+  # ------------------------------- WFE --------------------------------
+  smart_contracts:
+    container_name: smart_contracts
+    image: "python:3"
+    entrypoint: "tail -f /dev/null"
+    working_dir: /app
+    environment:
+      - WEB3_INFURA_PROJECT_ID=8cefcaa06dad492f8e954e9a1d9b16d9
+    volumes:
+      - ./smart_contracts/:/app/
     networks:
       - dev
 
