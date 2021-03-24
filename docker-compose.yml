@@ -40,6 +40,7 @@ services:
       - ETH_CHAIN_ID=42
       - MIN_OUTGOING_CONFIRMATIONS=2
       - LINK_CONTRACT_ADDRESS=0xa36085F69e2889c224210F603D836748e7dC0088
+      - MINIMUM_CONTRACT_PAYMENT=100000000000000000
       - CHAINLINK_TLS_PORT=0
       - SECURE_COOKIES=false
       - GAS_UPDATER_ENABLED=true
@@ -64,7 +65,7 @@ services:
     entrypoint: "tail -f /dev/null"
     working_dir: /app
     ports:
-     - "8001:8001"
+     - "8001:8000"
     volumes:
       - ./external_adapter/:/app/
     networks:

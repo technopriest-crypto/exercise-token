@@ -47,7 +47,7 @@
   Set the wallet private key: `export PRIVATE_KEY=[wallet_private_key]`
 
   Deploy contract:
-  
+
     ```
     brownie run scripts/deploy_api_consumer.py --network kovan
     brownie run scripts/fund_chainlink_api.py --network kovan

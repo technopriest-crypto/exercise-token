@@ -1,0 +1,7 @@
+click==7.1.2
+environs==9.3.1
+funcy==1.15
+marshmallow==3.10.0
+python-dotenv==0.15.0
+WebOb==1.8.7
+Werkzeug==1.0.1
