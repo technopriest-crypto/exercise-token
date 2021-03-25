@@ -46,9 +46,89 @@
 
   Set the wallet private key: `export PRIVATE_KEY=[wallet_private_key]`
 
+  Set your chainlink node address `export CLNODE_ADDRESS=0x9c9361F06180EE1F6A554886e31Bd9383652c92F`
+
   Deploy contract:
 
     ```
-    brownie run scripts/deploy_api_consumer.py --network kovan
-    brownie run scripts/fund_chainlink_api.py --network kovan
+    brownie run scripts/01_deploy_oracle.py --network kovan
     ```
+
+- Add your node to the chainlink oracle contract by calling the `setFulfillmentPermission` function of the oracle contract:
+
+  `brownie run scripts/02_set_fulfillment_permissions.py --network kovan`
+
+  make sure the `CLNODE_ADDRESS` env var is correctly set to your node.
+
+
+- Now, on the Chainlink node create a bridge and a job:
+
+    - Create Bridge on the node
+
+      - **Bridge Name:** ea-google-fit
+      - **Bridge URL:** http://external_adapter.dev:8000
+
+    - Create a Job:
+      ```
+      {
+        "name": "google-fit",
+      	"initiators": [
+      		{
+      			"type": "runlog",
+      			"params": {
+      				"address": "0x07d654f98dd16563f3585779623e5f724cc62d70"
+      			}
+      		}
+      	],
+      	"tasks": [
+      		{
+      			"type": "ea-google-fit",
+      			"confirmations": null,
+      			"params": {}
+      		},
+      		{
+      			"type": "copy",
+      			"confirmations": null,
+      			"params": {
+      				"copyPath": [
+      					"steps"
+      				]
+      			}
+      		},
+      		{
+      			"type": "ethuint256",
+      			"confirmations": null,
+      			"params": {}
+      		},
+      		{
+      			"type": "ethtx",
+      			"confirmations": null,
+      			"params": {}
+      		}
+      	],
+      	"startAt": null,
+      	"endAt": null
+      }
+      ```
+
+      Set the env var for the job just created: `export CLNODE_JOBID=702f88cdcb1f417994922327b3e84fb1`
+
+
+- Deploy the token contract:
+
+  `brownie run scripts/03_deploy_exercise_token.py --network kovan`
+
+
+- Deploy the token contract:
+
+  `brownie run scripts/04_deploy_exercise_token_claim.py --network kovan`
+
+  and add chainlink funds to the claim contract:
+
+  `brownie run scripts/05_fund_chainlink_api.py --network kovan`
+
+  *Note:* Your wallet needs to have chainlink tokens
+
+- Add the current claim contract as minter of our token:
+
+  `brownie run scripts/06_add_minter.py --network kovan`

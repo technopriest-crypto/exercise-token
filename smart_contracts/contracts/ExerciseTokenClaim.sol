@@ -32,7 +32,7 @@ contract ExerciseTokenClaim is ChainlinkClient {
 
     function claimTokens() public {
         Chainlink.Request memory req = buildChainlinkRequest(jobId, address(this), this.fulfillSteps.selector);
-        req.add("requester", msg.sender);
+        req.add("requester", addressToString(msg.sender));
 
         bytes32 requestId = sendChainlinkRequestTo(oracle, req, fee);
         jobRequests[requestId] = msg.sender;
@@ -54,4 +54,19 @@ contract ExerciseTokenClaim is ChainlinkClient {
             result := mload(add(source, 32))
         }
     }
+
+    function addressToString(address x) internal pure returns (string memory) {
+        bytes32 value = bytes32(uint256(x));
+        bytes memory alphabet = "0123456789abcdef";
+
+        bytes memory str = new bytes(42);
+        str[0] = '0';
+        str[1] = 'x';
+        for (uint i = 0; i < 20; i++) {
+            str[2+i*2] = alphabet[uint(uint8(value[i + 12] >> 4))];
+            str[3+i*2] = alphabet[uint(uint8(value[i + 12] & 0x0f))];
+        }
+        return string(str);
+    }
+
 }

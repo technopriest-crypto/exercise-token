@@ -10,9 +10,7 @@ contract ExerciseToken is ERC20, AccessControl, Ownable {
     // Create a new role identifier for the minter role
     bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
 
-    constructor() ERC20("ExerciseToken", "ETKN") {
-
-    }
+    constructor() ERC20("ExerciseToken", "ETKN") public {}
 
     function addMinter(address minter) public onlyOwner {
         // only the owner can call specialThing()!
