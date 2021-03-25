@@ -34,8 +34,21 @@
 
   ```docker exec -it web /bin/bash```
 
+- To run the React App
 
+  Enter into the react-app directory
 
+  `cd react-app`
+
+  Build the React App
+
+  `docker build --tag react-app .`
+
+  Run the React App on port 3000 using `npm run start`
+
+  `docker run -p 3000:3000 react-app npm run start sleep 30`
+
+  Visit the React App at [localhost:3000](http://localhost:3000/)
 
 - In the smart contract dev container:
 

@@ -1,0 +1,34 @@
+{
+  "name": "chartkick",
+  "version": "3.2.1",
+  "homepage": "https://github.com/ankane/chartkick.js",
+  "description": "Create beautiful charts with one line of JavaScript",
+  "main": "dist/chartkick.js",
+  "scripts": {
+    "build": "rollup -c",
+    "lint": "eslint src"
+  },
+  "dependencies": {},
+  "keywords": [
+    "charts"
+  ],
+  "authors": [
+    "ankane"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ankane/chartkick.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "devDependencies": {
+    "@rollup/plugin-buble": "^0.21.1",
+    "@rollup/plugin-commonjs": "^11.0.2",
+    "@rollup/plugin-node-resolve": "^7.1.1",
+    "eslint": "^5.16.0",
+    "rollup": "^1.11.3",
+    "rollup-plugin-uglify": "^6.0.2"
+  }
+}
