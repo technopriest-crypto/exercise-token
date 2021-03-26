@@ -4,7 +4,6 @@ import React, { Component } from 'react';
 import { Button, Modal, Navbar, Nav, NavDropdown } from "react-bootstrap";
 import { LineChart } from 'react-chartkick'
 import 'chart.js'
-
 import DarkMode from "./components/DarkMode"
 // import { NavigationBar } from './components/NavigationBar';
 // Step data that is displayed on graph
@@ -115,12 +114,16 @@ class App extends Component {
             </Modal.Footer>
           </Modal>
 
-        {/* The Line chart */}
+        {/* The Line chart #0074D9 */}
 
         <hr/>
 
         <p>Daily Steps</p>
-        <LineChart data={steps} colors={["#0074D9"]} width="70%" height="400px" thousands=","/>
+        <LineChart data={steps}
+        dataset={{backgroundColor: 'rgba(48,125,246,1)', borderColor: 'rgba(0,0,0,1)', borderWidth: 2,
+        radius: 4, pointHoverRadius: 10, pointHoverBackgroundColor: 'rgba(48,125,246,1)',
+        hoverBorderColor: 'black', hoverBorderWidth : '2'}}
+        width="70%" height="400px" thousands=","/>
 
       </header>
     </div>

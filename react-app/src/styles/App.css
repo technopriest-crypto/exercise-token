@@ -11,6 +11,9 @@
   font-size: calc(6px + 2vmin);
 }
 
+.chart-container {
+  font-size: calc(6px + 2vmin);
+}
 /*.App-header {
   background-color: #FFFFFF;
   min-height: 25vh;
