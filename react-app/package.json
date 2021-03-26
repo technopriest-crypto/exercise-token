@@ -17,6 +17,7 @@
     "react-bootstrap": "^1.5.2",
     "react-chartjs-2": "^2.11.1",
     "react-chartkick": "^0.4.1",
+    "react-dark-mode-toggle": "^0.2.0",
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
     "react-simple-oauth2-login": "^0.2.0",

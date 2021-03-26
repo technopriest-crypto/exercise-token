@@ -1,11 +1,12 @@
-import './App.css';
+import './styles/App.css';
 import Web3 from 'web3'
 import React, { Component } from 'react';
 import { Button, Modal, Navbar, Nav, NavDropdown } from "react-bootstrap";
 import { LineChart } from 'react-chartkick'
 import 'chart.js'
-// import { NavigationBar } from './components/NavigationBar';
 
+import DarkMode from "./components/DarkMode"
+// import { NavigationBar } from './components/NavigationBar';
 // Step data that is displayed on graph
 var steps = {
   "2021-03-16": 2230, "2021-03-17": 12234, "2021-03-18": 5432, "2021-03-19": 6578,
@@ -73,6 +74,7 @@ class App extends Component {
             <NavDropdown.Divider />
             <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
             </NavDropdown>
+            <DarkMode />
           </Nav>
           <Navbar.Text>
             Signed in as: {this.state.account}
