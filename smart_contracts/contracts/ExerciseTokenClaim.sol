@@ -9,7 +9,6 @@ import "./ExerciseToken.sol";
 contract ExerciseTokenClaim is ChainlinkClient {
 
     uint256 public volume;
-
     address private oracle;
     bytes32 private jobId;
     uint256 private fee;

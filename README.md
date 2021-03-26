@@ -43,7 +43,7 @@
 
   `docker build --tag react-app .`
 
-  Run the React App on port 3000 using `npm run start`:
+  Run the React App on port 3000 using npm run start:
 
   `docker run -p 3000:3000 react-app npm run start sleep 30`
 
