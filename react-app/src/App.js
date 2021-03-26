@@ -11,23 +11,30 @@ var steps = {
   "2021-03-20": 7898, "2021-03-21": 4200, "2021-03-22": 6942
 };
 
-class App extends Component {
+let web3 = new Web3(Web3.givenProvider);
+let contract_address = "0xdEF57D6D6bc7501Af00B4311602d9c7A83E3388F";
+let abi = [{'inputs': [{'internalType': 'address', 'name': '_oracle', 'type': 'address'}, {'internalType': 'string', 'name': '_jobId', 'type': 'string'}, {'internalType': 'uint256', 'name': '_fee', 'type': 'uint256'}, {'internalType': 'address', 'name': '_link', 'type': 'address'}, {'internalType': 'contract ExerciseToken', 'name': '_token', 'type': 'address'}], 'stateMutability': 'nonpayable', 'type': 'constructor', 'name': 'constructor'}, {'anonymous': false, 'inputs': [{'indexed': true, 'internalType': 'bytes32', 'name': 'id', 'type': 'bytes32'}], 'name': 'ChainlinkCancelled', 'type': 'event'}, {'anonymous': false, 'inputs': [{'indexed': true, 'internalType': 'bytes32', 'name': 'id', 'type': 'bytes32'}], 'name': 'ChainlinkFulfilled', 'type': 'event'}, {'anonymous': false, 'inputs': [{'indexed': true, 'internalType': 'bytes32', 'name': 'id', 'type': 'bytes32'}], 'name': 'ChainlinkRequested', 'type': 'event'}, {'inputs': [], 'name': 'claimTokens', 'outputs': [], 'stateMutability': 'nonpayable', 'type': 'function'}, {'inputs': [{'internalType': 'bytes32', 'name': '_requestId', 'type': 'bytes32'}, {'internalType': 'uint256', 'name': '_steps', 'type': 'uint256'}], 'name': 'fulfillSteps', 'outputs': [], 'stateMutability': 'nonpayable', 'type': 'function'}, {'inputs': [{'internalType': 'string', 'name': 'source', 'type': 'string'}], 'name': 'stringToBytes32', 'outputs': [{'internalType': 'bytes32', 'name': 'result', 'type': 'bytes32'}], 'stateMutability': 'pure', 'type': 'function'}, {'inputs': [], 'name': 'volume', 'outputs': [{'internalType': 'uint256', 'name': '', 'type': 'uint256'}], 'stateMutability': 'view', 'type': 'function'}];
 
-  async claimTokens() {
-    const web3 = new Web3(Web3.givenProvider || "http://localhost:8545")
-    let abi = require('./abis/claimTokensAbi.js');
-    var contract = new web3.eth.Contract(abi, '0xEBCee40Ce9CfAa4E6B0DdC007a8AB829D463d018');
-    contract.methods.claimTokens().send({from: this.state.account})
-  }
+class App extends Component {
 
   componentWillMount() {
     this.loadBlockchainData()
   }
 
   async loadBlockchainData() {
-    const web3 = new Web3(Web3.givenProvider || "http://localhost:8545")
     const accounts = await web3.eth.getAccounts()
+    window.ethereum.enable();
     this.setState({ account: accounts[0] })
+  }
+
+  async claimTokens() {
+    web3.eth.getAccounts().then(function (accounts) {
+      let contract = new web3.eth.Contract(abi, contract_address);
+      contract.methods.claimTokens()
+          .send({from: accounts[0], gasPrice: web3.utils.toWei('4.1', 'Gwei')})
+          .then(console.log)
+          .catch(console.log);
+    });
   }
 
   handleClose() {
@@ -40,10 +47,8 @@ class App extends Component {
 
   constructor(props) {
     super(props)
-
     this.handleShow = this.handleShow.bind(this);
 		this.handleClose = this.handleClose.bind(this);
-
     this.state = { account: '', show: false };
   }
 
