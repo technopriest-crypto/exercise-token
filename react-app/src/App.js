@@ -13,55 +13,64 @@ var steps = {
 
 class App extends Component {
 
-handleClose = () => this.setState({show: true});
-handleShow = () => this.setState({show: false});
+  async claimTokens() {
+    const web3 = new Web3(Web3.givenProvider || "http://localhost:8545")
+    let abi = require('./abis/claimTokensAbi.js');
+    var contract = new web3.eth.Contract(abi, '0xEBCee40Ce9CfAa4E6B0DdC007a8AB829D463d018');
+    contract.methods.claimTokens().send({from: this.state.account})
+  }
 
-async claimTokens() {
-  const web3 = new Web3(Web3.givenProvider || "http://localhost:8545")
-  let abi = require('./abis/claimTokensAbi.js');
-  var contract = new web3.eth.Contract(abi, '0xEBCee40Ce9CfAa4E6B0DdC007a8AB829D463d018');
-  contract.methods.claimTokens().send({from: this.state.account})
-}
+  componentWillMount() {
+    this.loadBlockchainData()
+  }
 
-componentWillMount() {
-  this.loadBlockchainData()
-}
+  async loadBlockchainData() {
+    const web3 = new Web3(Web3.givenProvider || "http://localhost:8545")
+    const accounts = await web3.eth.getAccounts()
+    this.setState({ account: accounts[0] })
+  }
 
-async loadBlockchainData() {
-  const web3 = new Web3(Web3.givenProvider || "http://localhost:8545")
-  const accounts = await web3.eth.getAccounts()
-  this.setState({ account: accounts[0] })
-}
+  handleClose() {
+		this.setState({ show: false });
+	}
 
-constructor(props) {
-  super(props)
-  this.state = { account: '', show: false }
-}
+	handleShow() {
+		this.setState({ show: true });
+	}
 
-render() {
-  return (
-    <div className="App">
+  constructor(props) {
+    super(props)
 
-    <NavigationBar />
+    this.handleShow = this.handleShow.bind(this);
+		this.handleClose = this.handleClose.bind(this);
 
-    <p>Your account: {this.state.account}</p>
+    this.state = { account: '', show: false };
+  }
 
-    <p>
-      <Button variant="warning" onClick={this.handleShow}>
-          Open Demo Modal
-      </Button>
-      <Button variant="primary" onClick={this.claimTokens}>
-          Claim Tokens!
-      </Button>
-      <Button variant="link">
-        <a href="https://github.com/login/oauth/authorize?client_id=489170c61ca8acc8d476">Sign in with GitHub</a>
-      </Button>
-    </p>
+  render() {
+    return (
+      <div className="App">
+
+      <NavigationBar />
+
+      <p>Your account: {this.state.account}</p>
+
+      <p>
+        <Button variant="warning" onClick={this.handleShow}>
+            Open Demo Modal
+        </Button>
+        <Button variant="primary" onClick={this.claimTokens}>
+            Claim Tokens!
+        </Button>
+        <Button variant="link">
+            <a href="https://github.com/login/oauth/authorize?client_id=489170c61ca8acc8d476">Sign in with GitHub</a>
+        </Button>
+      </p>
 
       <header className="App-header">
         <h1>Exercise Token</h1>
 
-          <Modal size="sml" show={this.show} onHide={this.handleClose}>
+          <Modal size="sml" show={this.state.show} onHide={this.handleClose}>
             <Modal.Header closeButton>
               <Modal.Title>🎉</Modal.Title>
             </Modal.Header>
@@ -80,8 +89,8 @@ render() {
 
       </header>
     </div>
-  );
-}
+    );
+  }
 }
 
 export default App;
