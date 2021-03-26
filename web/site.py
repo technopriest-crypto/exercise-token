@@ -15,8 +15,10 @@ from webob import Response, exc
 from funcy import memoize, cache
 from pathlib import Path
 from environs import Env
+
 from google_auth_oauthlib.flow import Flow
 import googleapiclient.discovery
+import google.oauth2.credentials
 
 os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 
@@ -94,7 +96,7 @@ def oauth2_callback(req):
 
     flow.redirect_uri = "http://localhost:8000/oauth2callback/"
     flow.fetch_token(code=req.GET['code'])
-    credentials = flow.credentials
+    credentials_dict = credentials_to_dict(flow.credentials)
 
 
     # The ID is formatted like: "startTime-endTime" where startTime and endTime are
@@ -106,6 +108,8 @@ def oauth2_callback(req):
     DATA_SET = "%s-%s" % (START, END)
     DATA_SOURCE = "derived:com.google.step_count.delta:com.google.android.gms:estimated_steps"
 
+    credentials = google.oauth2.credentials.Credentials(**credentials_dict)
+
     fitness_service = googleapiclient.discovery.build('fitness', 'v1', credentials=credentials)
 
     resp = (fitness_service
@@ -114,7 +118,11 @@ def oauth2_callback(req):
             .datasets()
             .get(userId='me', dataSourceId=DATA_SOURCE, datasetId=DATA_SET)
             .execute())
-    import pdb; pdb.set_trace()
+
+
+    total_steps = sum([p['value'][0]['intVal'] for p in resp['point']])
+    print("total_steps", total_steps)
+
     return get_template('approved.html').render(**req.GET)
 
 
