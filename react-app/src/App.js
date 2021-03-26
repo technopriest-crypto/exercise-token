@@ -61,7 +61,7 @@ class App extends Component {
       <div className="App">
 
       {/* The NavigationBar */}
-      <Navbar bg="white" expand="lg">
+      <Navbar bg="dark" variant="dark">
         <Navbar.Brand href="#home">Exercise Token</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
@@ -116,6 +116,9 @@ class App extends Component {
           </Modal>
 
         {/* The Line chart */}
+
+        <hr/>
+
         <p>Daily Steps</p>
         <LineChart data={steps} colors={["#0074D9"]} width="70%" height="400px" thousands=","/>
 

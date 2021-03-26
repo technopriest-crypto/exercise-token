@@ -1,27 +1,16 @@
-/*
 #darkMode {
   position: relative;
-  width: 50px;
-  height: 26px;
-  border-radius: 15px;
-  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.4);
-  background: var(--gray);
+  color: black;
+  background: white;
   transition: all 0.3s;
-}
-
-#darkMode:hover,
-#darkMode:focus {
-  filter: none;
-  background-color: black;
-  cursor: pointer;
 }
 
 #darkMode.clicked {
   filter: none !important;
-  background-color: white;
+  color: white;
+  background: var(--blue);
 }
 
-*/
 :root {
   --blue: rgb(20, 50, 80);
   --white: #FFFFFF;
@@ -29,7 +18,7 @@
 
 body.light {
   --background-color: var(--white);
-  --text-color: var(--blue);
+  --text-color: black;
 }
 
 body.dark {
@@ -40,5 +29,5 @@ body.dark {
 body {
   background: var(--background-color);
   color: var(--text-color);
-  transition: background 0.3s ease-in-out, color 0.6s ease-in-out;
+  transition: background 0.3s ease-in-out, color 0.3s ease-in-out;
 }

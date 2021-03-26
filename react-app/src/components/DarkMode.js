@@ -32,13 +32,9 @@ const DarkMode = () => {
     }
   }
 
-  return <Button variant={theme} onClick={e => switchTheme(e)}>
-    Theme toggler
-  </Button>
-
-  /* <button className={theme === "dark" ? clickedClass : ""}
-          id="darkMode"
-          onClick={e => switchTheme(e)}></button> */
+  return <Button variant="default" className={theme === "dark" ? clickedClass : ""} id="darkMode" onClick={e => switchTheme(e)}>
+            Theme
+         </Button>
 }
 
 export default DarkMode
