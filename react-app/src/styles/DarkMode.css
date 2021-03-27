@@ -1,0 +1,33 @@
+#darkMode {
+  position: relative;
+  color: black;
+  background: white;
+  transition: all 0.3s;
+}
+
+#darkMode.clicked {
+  filter: none !important;
+  color: white;
+  background: var(--blue);
+}
+
+:root {
+  --blue: rgb(20, 50, 80);
+  --white: #FFFFFF;
+}
+
+body.light {
+  --background-color: var(--white);
+  --text-color: black;
+}
+
+body.dark {
+  --background-color: var(--blue);
+  --text-color: var(--white);
+}
+
+body {
+  background: var(--background-color);
+  color: var(--text-color);
+  transition: background 0.3s ease-in-out, color 0.3s ease-in-out;
+}

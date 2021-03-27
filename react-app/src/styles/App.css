@@ -1,0 +1,32 @@
+.App {
+  text-align: center;
+}
+
+.App-header {
+  min-height: 25vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(6px + 2vmin);
+}
+
+.chart-container {
+  font-size: calc(6px + 2vmin);
+}
+/*.App-header {
+  background-color: #FFFFFF;
+  min-height: 25vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(6px + 2vmin);
+  color: black;
+}
+
+
+.App-link {
+  color: #61dafb;
+}
+*/
