@@ -43,7 +43,7 @@
 
   `docker build --tag react-app .`
 
-  Run the React App on port 3000 using `npm run start`:
+  Run the React App on port 3000 using npm run start:
 
   `docker run -p 3000:3000 react-app npm run start sleep 30`
 
@@ -123,7 +123,7 @@
       }
       ```
 
-      Set the env var for the job just created: `export CLNODE_JOBID=702f88cdcb1f417994922327b3e84fb1`
+      Set the env var for the job just created using the jobid from your web interface: `export CLNODE_JOBID=702f88cdcb1f417994922327b3e84fb1`
 
 
 - Deploy the token contract:
@@ -139,7 +139,7 @@
 
   `brownie run scripts/05_fund_chainlink_api.py --network kovan`
 
-  *Note:* Your wallet needs to have chainlink tokens
+  *Note:* Your wallet needs to have LINK tokens, which can be added by following [this guide](https://docs.chain.link/docs/acquire-link)
 
 - Add the current claim contract as minter of our token:
 
