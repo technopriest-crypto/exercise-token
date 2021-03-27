@@ -33,7 +33,7 @@ function App() {
     </p>
 
       <header className="App-header">
-        <h1>Exercise Token</h1>
+        <h1>Fitcoin</h1>
 
           <Modal size="sml" show={show} onHide={handleClose}>
             <Modal.Header closeButton>
