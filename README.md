@@ -56,7 +56,7 @@
 
   Install brownie: `pip install eth-brownie`
 
-  Set the wallet private key: `export PRIVATE_KEY=[wallet_private_key]`
+  Set the wallet private key: `export PRIVATE_KEY=wallet_private_key`
 
   Set your chainlink node address `export CLNODE_ADDRESS=0x9c9361F06180EE1F6A554886e31Bd9383652c92F`
 
