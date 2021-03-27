@@ -122,7 +122,7 @@
       	"endAt": null
       }
       ```
-      Find the job id at the top of the webpage after creating the job
+
       Set the env var for the job just created using the jobid from your web interface: `export CLNODE_JOBID=YOUR_JOB_ID`
 
 
