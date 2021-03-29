@@ -4,13 +4,14 @@ import React, { Component } from 'react';
 import { Button, Modal, Navbar, Nav, NavDropdown } from "react-bootstrap";
 import { LineChart } from 'react-chartkick'
 import 'chart.js'
-import DarkMode from "./components/DarkMode"
+import DarkMode, { graphColor } from "./components/DarkMode"
 // import { NavigationBar } from './components/NavigationBar';
 // Step data that is displayed on graph
 var steps = {
   "2021-03-16": 2230, "2021-03-17": 12234, "2021-03-18": 5432, "2021-03-19": 6578,
   "2021-03-20": 7898, "2021-03-21": 4200, "2021-03-22": 6942
 };
+// Could use CanvasJS in the future
 
 // Defining the web3 parameters
 let web3 = new Web3(Web3.givenProvider);
@@ -48,11 +49,21 @@ class App extends Component {
 		this.setState({ show: true });
 	}
 
+  graphLight() {
+    this.setState({ graphcolor: 'white' })
+  }
+
+  graphDark() {
+    this.setState({ graphcolor: 'black' })
+  }
+
   constructor(props) {
     super(props)
     this.handleShow = this.handleShow.bind(this);
 		this.handleClose = this.handleClose.bind(this);
-    this.state = { account: '', show: false };
+    this.graphLight = this.graphLight.bind(this);
+    this.graphDark = this.graphDark.bind(this);
+    this.state = { account: '', show: false, graphcolor: ''};
   }
 
   render() {
@@ -120,10 +131,16 @@ class App extends Component {
 
         <p>Daily Steps</p>
         <LineChart data={steps}
-        dataset={{backgroundColor: 'rgba(48,125,246,1)', borderColor: 'rgba(0,0,0,1)', borderWidth: 2,
+        dataset={{backgroundColor: 'rgba(48,125,246,1)', borderColor: this.state.graphcolor, borderWidth: 2,
         radius: 4, pointHoverRadius: 10, pointHoverBackgroundColor: 'rgba(48,125,246,1)',
-        hoverBorderColor: 'black', hoverBorderWidth : '2'}}
+        hoverBorderColor: this.state.graphcolor, hoverBorderWidth : '2'}}
         width="70%" height="400px" thousands=","/>
+
+        <Button variant="primary" onClick={this.graphDark}>
+            Open Demo Modal
+        </Button>
+
+        <p>${graphColor}</p>
 
       </header>
     </div>
