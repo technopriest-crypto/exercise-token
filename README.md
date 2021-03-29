@@ -123,7 +123,9 @@
       }
       ```
 
-      Set the env var for the job just created using the jobid from your web interface: `export CLNODE_JOBID=702f88cdcb1f417994922327b3e84fb1`
+      Set the env var for the job just created using the jobid from your web interface:
+
+      `export CLNODE_JOBID=702f88cdcb1f417994922327b3e84fb1`
 
 
 - Deploy the token contract:
