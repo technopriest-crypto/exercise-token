@@ -144,3 +144,9 @@
 - Add the current claim contract as minter of our token:
 
   `brownie run scripts/06_add_minter.py --network kovan`
+
+- run
+
+  `brownie run scripts/99_exercise_token_claim_abi.py --network kovan`
+
+  to get the address and abi

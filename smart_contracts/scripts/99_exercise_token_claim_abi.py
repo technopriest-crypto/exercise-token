@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 import os
-from brownie import ExerciseTokenClaim, accounts, network, config
+from brownie import  ExerciseTokenClaim, accounts, network, config
 
 
 def main():

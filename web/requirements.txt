@@ -9,3 +9,6 @@ python-dotenv==0.15.0
 WebOb==1.8.7
 Werkzeug==1.0.1
 whitenoise==5.2.0
+google-auth-oauthlib==0.4.4
+google-api-python-client==2.0.2
+redis==3.5.3
