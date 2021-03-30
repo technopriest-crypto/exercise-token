@@ -3,6 +3,8 @@ import sys
 import logging
 import time
 import datetime
+import json
+import base64
 import click
 import jinja2
 import werkzeug.serving
@@ -19,6 +21,7 @@ from environs import Env
 from google_auth_oauthlib.flow import Flow
 import googleapiclient.discovery
 import google.oauth2.credentials
+import redis
 
 os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 
@@ -34,6 +37,10 @@ templates_env = jinja2.Environment(
     ),
     autoescape=jinja2.select_autoescape(["html", "xml"]),
 )
+
+rdb = redis.Redis(host=env("REDIS_HOST"),
+                port=env.int("REDIS_PORT", 6379),
+                db=env.int("REDIS_DB", 0))
 
 def credentials_to_dict(credentials):
   return {'token': credentials.token,
@@ -57,29 +64,49 @@ def home(req):
 def oauth2_request(req):
     # meat is here: https://developers.google.com/identity/protocols/oauth2/web-server#python
 
-    flow = Flow.from_client_config(
-        client_config={
-              "web": {
-                  "client_id": env("OAUTH_CLIENT_ID"),
-                  "client_secret": env("OAUTH_CLIENT_SECRET"),
-                  # "callbackUrl": "http://localhost:8000",
-                  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-                  "token_uri": "https://accounts.google.com/o/oauth2/token"
-              }
-        },
-        scopes=["https://www.googleapis.com/auth/fitness.activity.read"])
+    if req.method== "POST":
+        address = req.POST['address']
+        flow = Flow.from_client_config(
+            client_config={
+                  "web": {
+                      "client_id": env("OAUTH_CLIENT_ID"),
+                      "client_secret": env("OAUTH_CLIENT_SECRET"),
+                      # "callbackUrl": "http://localhost:8000",
+                      "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+                      "token_uri": "https://accounts.google.com/o/oauth2/token"
+                  }
+            },
+            scopes=["https://www.googleapis.com/auth/fitness.activity.read"])
 
-    flow.redirect_uri = "http://localhost:8000/oauth2callback/"
+        flow.redirect_uri = "http://localhost:8000/oauth2callback/"
 
-    auth_url, _ = flow.authorization_url(
-        prompt='consent',
-        access_type='offline',
-        include_granted_scopes='true')
+        auth_url, _ = flow.authorization_url(
+            prompt='consent',
+            access_type='offline',
+            include_granted_scopes='true')
+        resp = Response(status=302, location=auth_url)
+        resp.set_cookie('ADDRESS', address, secure=True)
+        return resp
 
-    return Response(status=302, location=auth_url)
+    return get_template('request.html').render()
+
+
+def is_registered(req):
+    address = req.GET.get("address")
+    if not address:
+        raise exc.HTTPBadRequest
+
+    if not rdb.get(address.encode('utf-8').lower()):
+        raise exc.HTTPNotFound
+
+    return Response(json={"ok": True})
+
 
 
 def oauth2_callback(req):
+    address = req.cookies.get('ADDRESS')
+    if not address:
+        raise exc.HTTPBadRequest
 
     flow = Flow.from_client_config(
         client_config={
@@ -96,8 +123,12 @@ def oauth2_callback(req):
 
     flow.redirect_uri = "http://localhost:8000/oauth2callback/"
     flow.fetch_token(code=req.GET['code'])
+    # import pdb; pdb.set_trace()
     credentials_dict = credentials_to_dict(flow.credentials)
 
+    # save in redis the credentials for this user/address.
+    #  this can be decoded with json.loads(base64.b64decode(b64str.decode('ascii')))
+    rdb.set(address.lower(), base64.b64encode(json.dumps(credentials_dict).encode('ascii')))
 
     # The ID is formatted like: "startTime-endTime" where startTime and endTime are
     # 64 bit integers (epoch time with nanoseconds).
@@ -121,9 +152,9 @@ def oauth2_callback(req):
 
 
     total_steps = sum([p['value'][0]['intVal'] for p in resp['point']])
-    print("total_steps", total_steps)
+    # print("total_steps", total_steps)
 
-    return get_template('approved.html').render(**req.GET)
+    return get_template('approved.html').render(total_steps=total_steps, **req.GET)
 
 
 @wsgify
@@ -134,6 +165,8 @@ def application(req):
         return oauth2_request(req)
     elif req.path == "/oauth2callback/":
         return oauth2_callback(req)
+    elif req.path == "/is-registered/":
+        return is_registered(req)
     raise exc.HTTPNotFound
 
 

@@ -56,9 +56,9 @@
 
   Install brownie: `pip install eth-brownie`
 
-  Set the wallet private key: `export PRIVATE_KEY=[wallet_private_key]`
+  Set the wallet private key: `export PRIVATE_KEY='wallet_private_key'`
 
-  Set your chainlink node address `export CLNODE_ADDRESS=0x9c9361F06180EE1F6A554886e31Bd9383652c92F`
+  Set your chainlink node address `export CLNODE_ADDRESS='0x9c9361F06180EE1F6A554886e31Bd9383652c92F'`
 
   Deploy contract:
 
@@ -123,7 +123,7 @@
       }
       ```
 
-      Set the env var for the job just created using the jobid from your web interface: `export CLNODE_JOBID=702f88cdcb1f417994922327b3e84fb1`
+      Set the env var for the job just created using the jobid from your web interface: `export CLNODE_JOBID=YOUR_JOB_ID`
 
 
 - Deploy the token contract:
@@ -144,3 +144,9 @@
 - Add the current claim contract as minter of our token:
 
   `brownie run scripts/06_add_minter.py --network kovan`
+
+- run
+
+  `brownie run scripts/99_exercise_token_claim_abi.py --network kovan`
+
+  to get the address and abi
