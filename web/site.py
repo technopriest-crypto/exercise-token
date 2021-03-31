@@ -7,6 +7,7 @@ import json
 import base64
 import click
 import jinja2
+import toml
 import werkzeug.serving
 from whitenoise import WhiteNoise
 from werkzeug.debug import DebuggedApplication
@@ -29,6 +30,19 @@ logger = logging.getLogger(__name__)
 env = Env()
 env.read_env()
 # ------- initialization -------
+
+contracts_folder = env('CONTRACTS_FOLDER', "/contracts/")
+
+fp_exercise_token = os.path.join(contracts_folder, "exercise_token.toml")
+fp_exercise_token_claim = os.path.join(contracts_folder, "exercise_token_claim.toml")
+
+exercise_token = (toml.load(fp_exercise_token)
+    if os.path.exists(fp_exercise_token)
+    else {})
+    
+exercise_token_claim = (toml.load(fp_exercise_token_claim)
+    if os.path.exists(fp_exercise_token_claim)
+    else {})
 
 
 templates_env = jinja2.Environment(
@@ -57,7 +71,11 @@ def get_template(template_name):
 
 # @cache(60 * 60)
 def home(req):
-    return get_template('home.html').render(current_year=datetime.datetime.now().year)
+    return get_template('home.html').render(
+        current_year=datetime.datetime.now().year,
+        exercise_token=exercise_token,
+        exercise_token_claim=exercise_token_claim
+    )
 
 
 
@@ -85,7 +103,7 @@ def oauth2_request(req):
             access_type='offline',
             include_granted_scopes='true')
         resp = Response(status=302, location=auth_url)
-        resp.set_cookie('ADDRESS', address, secure=True)
+        resp.set_cookie('ADDRESS', address)
         return resp
 
     return get_template('request.html').render()
@@ -106,7 +124,7 @@ def is_registered(req):
 def oauth2_callback(req):
     address = req.cookies.get('ADDRESS')
     if not address:
-        raise exc.HTTPBadRequest
+        raise exc.HTTPBadRequest("cookie ADDRESS is not set")
 
     flow = Flow.from_client_config(
         client_config={

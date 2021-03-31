@@ -8,29 +8,11 @@
   let web3 = new Web3(Web3.givenProvider);
   window.ethereum.enable();
 
-  const contract_address = "0x5997DeB61Fd003ebC06E08e7d71725C1e2a77A90";
-  const abi = [{'inputs': [{'internalType': 'address', 'name': '_oracle', 'type': 'address'}, {'internalType': 'string', 'name': '_jobId', 'type': 'string'}, {'internalType': 'uint256', 'name': '_fee', 'type': 'uint256'}, {'internalType': 'address', 'name': '_link', 'type': 'address'}, {'internalType': 'contract ExerciseToken', 'name': '_token', 'type': 'address'}], 'stateMutability': 'nonpayable', 'type': 'constructor', 'name': 'constructor'}, {'anonymous': false, 'inputs': [{'indexed': true, 'internalType': 'bytes32', 'name': 'id', 'type': 'bytes32'}], 'name': 'ChainlinkCancelled', 'type': 'event'}, {'anonymous': false, 'inputs': [{'indexed': true, 'internalType': 'bytes32', 'name': 'id', 'type': 'bytes32'}], 'name': 'ChainlinkFulfilled', 'type': 'event'}, {'anonymous': false, 'inputs': [{'indexed': true, 'internalType': 'bytes32', 'name': 'id', 'type': 'bytes32'}], 'name': 'ChainlinkRequested', 'type': 'event'}, {'inputs': [], 'name': 'claimTokens', 'outputs': [], 'stateMutability': 'nonpayable', 'type': 'function'}, {'inputs': [{'internalType': 'bytes32', 'name': '_requestId', 'type': 'bytes32'}, {'internalType': 'uint256', 'name': '_steps', 'type': 'uint256'}], 'name': 'fulfillSteps', 'outputs': [], 'stateMutability': 'nonpayable', 'type': 'function'}, {'inputs': [{'internalType': 'string', 'name': 'source', 'type': 'string'}], 'name': 'stringToBytes32', 'outputs': [{'internalType': 'bytes32', 'name': 'result', 'type': 'bytes32'}], 'stateMutability': 'pure', 'type': 'function'}, {'inputs': [], 'name': 'volume', 'outputs': [{'internalType': 'uint256', 'name': '', 'type': 'uint256'}], 'stateMutability': 'view', 'type': 'function'}];
+  const contract_address = "{{ exercise_token_claim.address }}";
+  const abi = {{ exercise_token_claim.abi|tojson|safe }};
 
-  const token_address = "0x152dDEf10CE0359C101c2365cFe4b360F329b859";
-  const token_min_abi = [
-    // balanceOf
-    {
-      "constant":true,
-      "inputs":[{"name":"_owner","type":"address"}],
-      "name":"balanceOf",
-      "outputs":[{"name":"balance","type":"uint256"}],
-      "type":"function"
-    },
-    // decimals
-    {
-      "constant":true,
-      "inputs":[],
-      "name":"decimals",
-      "outputs":[{"name":"","type":"uint8"}],
-      "type":"function"
-    }
-  ];
-
+  const token_address = "{{ exercise_token.address }}";
+  const token_abi = {{ exercise_token.abi|tojson|safe }};
 
 
   function claimTokens() {
@@ -47,7 +29,7 @@
   function initPage() {
 
     web3.eth.getAccounts().then(function (accounts) {
-      let token_contract = new web3.eth.Contract(token_min_abi, token_address);
+      let token_contract = new web3.eth.Contract(token_abi, token_address);
       token_contract.methods.balanceOf(accounts[0]).call().then(function (balance) {
         $("#token-balance").html(balance);
       });
@@ -75,5 +57,7 @@
   <h2>EXERCISE TOKEN BALANCE = <span id="token-balance">--</span> EXT</h2>
 
   <button id="claim-tokens" onclick="claimTokens()">CLAIM TOKENS</button>
+
+
 </body>
 </html>
