@@ -6,7 +6,7 @@ import "@chainlink/contracts/src/v0.6/ChainlinkClient.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "./ExerciseToken.sol";
 
-contract ExerciseTokenClaim is ChainlinkClient {
+contract ExerciseTokenClaim is ChainlinkClient, Ownable {
 
     uint256 public volume;
     address private oracle;
@@ -37,6 +37,15 @@ contract ExerciseTokenClaim is ChainlinkClient {
         jobRequests[requestId] = msg.sender;
 
     }
+
+    function setOracle(address _oracle) public onlyOwner {
+        oracle = _oracle;
+    }
+
+    function setJobId(string memory _jobId) public onlyOwner {
+        jobId = stringToBytes32(_jobId);
+    }
+
 
     function fulfillSteps(bytes32 _requestId, uint256 _steps) public recordChainlinkFulfillment(_requestId) {
         exercise_token.mint(jobRequests[_requestId], _steps);

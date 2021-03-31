@@ -86,10 +86,7 @@
         "name": "google-fit",
       	"initiators": [
       		{
-      			"type": "runlog",
-      			"params": {
-      				"address": "0x07d654f98dd16563f3585779623e5f724cc62d70"
-      			}
+      			"type": "runlog"
       		}
       	],
       	"tasks": [
