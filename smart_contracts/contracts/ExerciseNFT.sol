@@ -10,14 +10,14 @@ contract ExerciseNFT is ERC721, VRFConsumerBase {
 
     uint256 public randomResult;
 
-    struct Character {
+    struct NFT {
         uint256 strength;
         uint256 speed;
         uint256 stamina;
         string name;
     }
 
-    Character[] public NFTs;
+    NFT[] public NFTs;
 
     mapping(bytes32 => string) public requestToCharacterName;
     mapping(bytes32 => address) public requestToSender;
@@ -56,7 +56,7 @@ contract ExerciseNFT is ERC721, VRFConsumerBase {
         uint256 speed = ((randomNumber % 10000) / 100);
         uint256 stamina = ((randomNumber % 1000000) / 10000);
 
-        characters.push(
+        NFTs.push(
             NFT(strength, speed, stamina, requestToCharacterName[requestId])
         );
         _safeMint(requestToSender[requestId], newId);
