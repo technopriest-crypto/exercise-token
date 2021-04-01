@@ -102,6 +102,7 @@ celerybeat.pid
 *.sage.py
 
 # Environments
+.envvars
 .env
 .venv
 env/
@@ -131,3 +132,6 @@ dmypy.json
 data/
 api.txt
 password.txt]
+
+
+.DS_Store

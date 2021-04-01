@@ -17,21 +17,20 @@
 
 - Create Network `docker network create dev`
 
+- create a file named `.env` in the root of the project with:
+
+  ```
+  WEB3_INFURA_PROJECT_ID=[the infura project id]
+  ETH_URL=[the url given by infura. should start with wss://...]
+  OAUTH_CLIENT_ID=[google api client id]
+  OAUTH_CLIENT_SECRET=[google api client secret]
+  PRIVATE_KEY=[a wallet private key with kovan eth. to be used to deploy the smart contracts]
+  ```
+
+
 - Run the `docker-compose` with the command :
 
   `docker-compose up -d`
-
-- Install Python web requirements
-
-  ```docker exec -it web pip install -r requirements.txt```
-
-- To run server:
-
-  ```docker exec -it web python site.py```
-
-  Or To call a shell inside web container:
-
-  ```docker exec -it web /bin/bash```
 
 - To run the React App:
 
