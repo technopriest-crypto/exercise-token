@@ -59,8 +59,8 @@ services:
       - SECURE_COOKIES=false
       - GAS_UPDATER_ENABLED=true
       - ALLOW_ORIGINS=*
-      - ETH_URL=wss://kovan.infura.io/ws/v3/8cefcaa06dad492f8e954e9a1d9b16d9
       - DATABASE_URL=postgresql://postgres:postgres@postgresdb.dev:5432/chainlink_kovan?sslmode=disable
+      - "ETH_URL=${ETH_URL}"
 
     volumes:
       - ./data/chainlink-kovan/:/chainlink
@@ -76,7 +76,6 @@ services:
   external_adapter:
     container_name: external_adapter
     image: "python:3"
-
     entrypoint: "sh entrypoint.sh"
     command: python external_adapter.py
     environment:
@@ -96,10 +95,12 @@ services:
   smart_contracts:
     container_name: smart_contracts
     image: "python:3"
-    entrypoint: "tail -f /dev/null"
+    entrypoint: "sh entrypoint.sh"
+    command: "tail -f /dev/null"
     working_dir: /app
     environment:
-      - WEB3_INFURA_PROJECT_ID=8cefcaa06dad492f8e954e9a1d9b16d9
+      - "PRIVATE_KEY=${PRIVATE_KEY}"
+      - "WEB3_INFURA_PROJECT_ID=${WEB3_INFURA_PROJECT_ID}"
     volumes:
       - ./smart_contracts/:/app/
       - contracts:/contracts/
