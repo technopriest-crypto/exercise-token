@@ -86,10 +86,7 @@
         "name": "google-fit",
       	"initiators": [
       		{
-      			"type": "runlog",
-      			"params": {
-      				"address": "0x07d654f98dd16563f3585779623e5f724cc62d70"
-      			}
+      			"type": "runlog"
       		}
       	],
       	"tasks": [
@@ -144,3 +141,9 @@
 - Add the current claim contract as minter of our token:
 
   `brownie run scripts/06_add_minter.py --network kovan`
+
+- run
+
+  `brownie run scripts/99_exercise_token_claim_abi.py --network kovan`
+
+  to get the address and abi

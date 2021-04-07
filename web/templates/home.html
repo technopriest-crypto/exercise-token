@@ -1,15 +1,19 @@
 <html>
 <head>
   <link rel="icon" href="data:;base64,iVBORw0KGgo=">
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.34/dist/web3.min.js"></script>
 
   <script>
   let web3 = new Web3(Web3.givenProvider);
   window.ethereum.enable();
 
-  const contract_address = "0xdEF57D6D6bc7501Af00B4311602d9c7A83E3388F";
-  const abi = [{'inputs': [{'internalType': 'address', 'name': '_oracle', 'type': 'address'}, {'internalType': 'string', 'name': '_jobId', 'type': 'string'}, {'internalType': 'uint256', 'name': '_fee', 'type': 'uint256'}, {'internalType': 'address', 'name': '_link', 'type': 'address'}, {'internalType': 'contract ExerciseToken', 'name': '_token', 'type': 'address'}], 'stateMutability': 'nonpayable', 'type': 'constructor', 'name': 'constructor'}, {'anonymous': false, 'inputs': [{'indexed': true, 'internalType': 'bytes32', 'name': 'id', 'type': 'bytes32'}], 'name': 'ChainlinkCancelled', 'type': 'event'}, {'anonymous': false, 'inputs': [{'indexed': true, 'internalType': 'bytes32', 'name': 'id', 'type': 'bytes32'}], 'name': 'ChainlinkFulfilled', 'type': 'event'}, {'anonymous': false, 'inputs': [{'indexed': true, 'internalType': 'bytes32', 'name': 'id', 'type': 'bytes32'}], 'name': 'ChainlinkRequested', 'type': 'event'}, {'inputs': [], 'name': 'claimTokens', 'outputs': [], 'stateMutability': 'nonpayable', 'type': 'function'}, {'inputs': [{'internalType': 'bytes32', 'name': '_requestId', 'type': 'bytes32'}, {'internalType': 'uint256', 'name': '_steps', 'type': 'uint256'}], 'name': 'fulfillSteps', 'outputs': [], 'stateMutability': 'nonpayable', 'type': 'function'}, {'inputs': [{'internalType': 'string', 'name': 'source', 'type': 'string'}], 'name': 'stringToBytes32', 'outputs': [{'internalType': 'bytes32', 'name': 'result', 'type': 'bytes32'}], 'stateMutability': 'pure', 'type': 'function'}, {'inputs': [], 'name': 'volume', 'outputs': [{'internalType': 'uint256', 'name': '', 'type': 'uint256'}], 'stateMutability': 'view', 'type': 'function'}];
+  const contract_address = "{{ exercise_token_claim.address }}";
+  const abi = {{ exercise_token_claim.abi|tojson|safe }};
+
+  const token_address = "{{ exercise_token.address }}";
+  const token_abi = {{ exercise_token.abi|tojson|safe }};
+
 
   function claimTokens() {
 
@@ -22,59 +26,38 @@
     });
   }
 
-  </script>
-  <!-- <script>
-    console.log(window.ethereum);
-    alert(window.ethereum.isMetaMask);
-    let web3 = new Web3(Web3.givenProvider)
-    // console.log(web3.eth);
-    // This function detects most providers injected at window.ethereum
-    // import detectEthereumProvider from '@metamask/detect-provider';
+  function initPage() {
 
-    // const provider = await detectEthereumProvider();
-    //
-    // if (provider) {
-    //   // From now on, this should always be true:
-    //   // provider === window.ethereum
-    //   startApp(provider); // initialize your app
-    // } else {
-    //   console.log('Please install MetaMask!');
-    // }
+    web3.eth.getAccounts().then(function (accounts) {
+      let token_contract = new web3.eth.Contract(token_abi, token_address);
+      token_contract.methods.balanceOf(accounts[0]).call().then(function (balance) {
+        $("#token-balance").html(balance);
+      });
 
-
-    const contract_address = "0xdEF57D6D6bc7501Af00B4311602d9c7A83E3388F";
-    const abi = [{'inputs': [{'internalType': 'address', 'name': '_oracle', 'type': 'address'}, {'internalType': 'string', 'name': '_jobId', 'type': 'string'}, {'internalType': 'uint256', 'name': '_fee', 'type': 'uint256'}, {'internalType': 'address', 'name': '_link', 'type': 'address'}, {'internalType': 'contract ExerciseToken', 'name': '_token', 'type': 'address'}], 'stateMutability': 'nonpayable', 'type': 'constructor', 'name': 'constructor'}, {'anonymous': false, 'inputs': [{'indexed': true, 'internalType': 'bytes32', 'name': 'id', 'type': 'bytes32'}], 'name': 'ChainlinkCancelled', 'type': 'event'}, {'anonymous': false, 'inputs': [{'indexed': true, 'internalType': 'bytes32', 'name': 'id', 'type': 'bytes32'}], 'name': 'ChainlinkFulfilled', 'type': 'event'}, {'anonymous': false, 'inputs': [{'indexed': true, 'internalType': 'bytes32', 'name': 'id', 'type': 'bytes32'}], 'name': 'ChainlinkRequested', 'type': 'event'}, {'inputs': [], 'name': 'claimTokens', 'outputs': [], 'stateMutability': 'nonpayable', 'type': 'function'}, {'inputs': [{'internalType': 'bytes32', 'name': '_requestId', 'type': 'bytes32'}, {'internalType': 'uint256', 'name': '_steps', 'type': 'uint256'}], 'name': 'fulfillSteps', 'outputs': [], 'stateMutability': 'nonpayable', 'type': 'function'}, {'inputs': [{'internalType': 'string', 'name': 'source', 'type': 'string'}], 'name': 'stringToBytes32', 'outputs': [{'internalType': 'bytes32', 'name': 'result', 'type': 'bytes32'}], 'stateMutability': 'pure', 'type': 'function'}, {'inputs': [], 'name': 'volume', 'outputs': [{'internalType': 'uint256', 'name': '', 'type': 'uint256'}], 'stateMutability': 'view', 'type': 'function'}];
-    //
-    //
-    // let contract;
-    window.addEventListener('load', () => {
-      if(typeof(web3) === 'undefined') {
-          return console.log("Metamask is not installed");
-      }
-
-      contract = web3.eth.contract(abi).at(contract_address);
+      jQuery.get("/is-registered/?address=" + accounts[0]).done(function() {
+          $("#register-link").hide();
+      })
+      .fail(function() {
+          $("#claim-tokens").hide();
+      });
 
     });
+  }
+  initPage();
 
-    function claimTokens() {
 
-      contract.claimTokens.sendTransaction(
-        {gasPrice: web3.toWei(4.1, 'Gwei')},
-        (error, result) => {
-            if(error) {
-                return console.log(error);
-            }
-            console.log("txhash: " + result);
-        }
-      );
-    }
-  </script> -->
+  </script>
+
 </head>
 <body>
-  Exercise Token
-  <div id="message"></div>
-  <a href="/oauth2request/">give me access to your google fit</a>
-  <br>
-  <button onclick="claimTokens()">CLAIM TOKENS</button>
+  <h1>Exercise Token</h1>
+
+  <p><a id="register-link" href="/oauth2request/">REGISTER HERE</a></p>
+
+  <h2>EXERCISE TOKEN BALANCE = <span id="token-balance">--</span> EXT</h2>
+
+  <button id="claim-tokens" onclick="claimTokens()">CLAIM TOKENS</button>
+
+
 </body>
 </html>
