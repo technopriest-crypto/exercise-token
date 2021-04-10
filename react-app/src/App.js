@@ -157,7 +157,9 @@ class App extends Component {
         </Button>
         */}
 
-        <svg width="200" height="200" version="1.1" xmlns="http://www.w3.org/2000/svg">
+        <p>This is the Dynamic NFT</p>
+
+        <svg width="100" height="250" version="1.1" xmlns="http://www.w3.org/2000/svg">
           {/* head */}
           <circle cx="50" cy="50" r="20" stroke="black" fill="transparent" stroke-width="5"/>
 
@@ -172,8 +174,6 @@ class App extends Component {
           <line x1="50" x2="100" y1="100" y2="100" stroke="black" stroke-width="5"/>
           <line x1="50" x2="0" y1="100" y2="100" stroke="black" stroke-width="5"/>
 
-          {/* muscles */}
-          <ellipse cx="75" cy="100" rx="15" ry="10" stroke="black" fill="black" stroke-width="5"/>
         </svg>
       </header>
     </div>
