@@ -17,21 +17,20 @@
 
 - Create Network `docker network create dev`
 
+- create a file named `.env` in the root of the project with:
+
+  ```
+  WEB3_INFURA_PROJECT_ID=[the infura project id]
+  ETH_URL=[the url given by infura. should start with wss://...]
+  OAUTH_CLIENT_ID=[google api client id]
+  OAUTH_CLIENT_SECRET=[google api client secret]
+  PRIVATE_KEY=[a wallet private key with kovan eth. to be used to deploy the smart contracts]
+  ```
+
+
 - Run the `docker-compose` with the command :
 
   `docker-compose up -d`
-
-- Install Python web requirements
-
-  ```docker exec -it web pip install -r requirements.txt```
-
-- To run server:
-
-  ```docker exec -it web python site.py```
-
-  Or To call a shell inside web container:
-
-  ```docker exec -it web /bin/bash```
 
 - To run the React App:
 
@@ -56,9 +55,9 @@
 
   Install brownie: `pip install eth-brownie`
 
-  Set the wallet private key: `export PRIVATE_KEY=[wallet_private_key]`
+  Set the wallet private key: `export PRIVATE_KEY='wallet_private_key'`
 
-  Set your chainlink node address `export CLNODE_ADDRESS=0x9c9361F06180EE1F6A554886e31Bd9383652c92F`
+  Set your chainlink node address `export CLNODE_ADDRESS='0x9c9361F06180EE1F6A554886e31Bd9383652c92F'`
 
   Deploy contract:
 
@@ -86,10 +85,7 @@
         "name": "google-fit",
       	"initiators": [
       		{
-      			"type": "runlog",
-      			"params": {
-      				"address": "0x07d654f98dd16563f3585779623e5f724cc62d70"
-      			}
+      			"type": "runlog"
       		}
       	],
       	"tasks": [
@@ -123,9 +119,13 @@
       }
       ```
 
+<<<<<<< HEAD
       Set the env var for the job just created using the jobid from your web interface:
 
       `export CLNODE_JOBID=702f88cdcb1f417994922327b3e84fb1`
+=======
+      Set the env var for the job just created using the jobid from your web interface: `export CLNODE_JOBID=YOUR_JOB_ID`
+>>>>>>> b67534f2b78164190a4ea90ae2143833247f406e
 
 
 - Deploy the token contract:
@@ -146,3 +146,9 @@
 - Add the current claim contract as minter of our token:
 
   `brownie run scripts/06_add_minter.py --network kovan`
+
+- run
+
+  `brownie run scripts/99_exercise_token_claim_abi.py --network kovan`
+
+  to get the address and abi

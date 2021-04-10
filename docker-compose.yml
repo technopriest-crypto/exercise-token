@@ -5,12 +5,19 @@ services:
   web:
     container_name: web
     image: "python:3"
-    entrypoint: "tail -f /dev/null"
+    entrypoint: "sh entrypoint.sh"
+    command: python site.py
+    environment:
+      - REDIS_HOST=redisdb.dev
+      - "OAUTH_CLIENT_ID=${OAUTH_CLIENT_ID}"
+      - "OAUTH_CLIENT_SECRET=${OAUTH_CLIENT_SECRET}"
     working_dir: /app
     ports:
      - "8000:8000"
+    depends_on: [ redisdb ]
     volumes:
       - ./web/:/app/
+      - contracts:/contracts/
     networks:
       - dev
 
@@ -27,6 +34,13 @@ services:
     networks:
       - dev
 
+  redisdb:
+    container_name: redisdb
+    image: "redis"
+    ports:
+     - "6379:6379"
+    networks:
+      - dev
   # ------------------------------- CHAINLINK NODE --------------------------------
 
   chainlink:
@@ -45,8 +59,8 @@ services:
       - SECURE_COOKIES=false
       - GAS_UPDATER_ENABLED=true
       - ALLOW_ORIGINS=*
-      - ETH_URL=wss://kovan.infura.io/ws/v3/8cefcaa06dad492f8e954e9a1d9b16d9
       - DATABASE_URL=postgresql://postgres:postgres@postgresdb.dev:5432/chainlink_kovan?sslmode=disable
+      - "ETH_URL=${ETH_URL}"
 
     volumes:
       - ./data/chainlink-kovan/:/chainlink
@@ -62,10 +76,15 @@ services:
   external_adapter:
     container_name: external_adapter
     image: "python:3"
-    entrypoint: "tail -f /dev/null"
+    entrypoint: "sh entrypoint.sh"
+    command: python external_adapter.py
+    environment:
+      - REDIS_HOST=redisdb.dev
+
     working_dir: /app
     ports:
      - "8001:8000"
+    depends_on: [ redisdb ]
     volumes:
       - ./external_adapter/:/app/
     networks:
@@ -76,15 +95,20 @@ services:
   smart_contracts:
     container_name: smart_contracts
     image: "python:3"
-    entrypoint: "tail -f /dev/null"
+    entrypoint: "sh entrypoint.sh"
+    command: "tail -f /dev/null"
     working_dir: /app
     environment:
+      - "PRIVATE_KEY=${PRIVATE_KEY}"
       - WEB3_INFURA_PROJECT_ID=8cefcaa06dad492f8e954e9a1d9b16d9
     volumes:
       - ./smart_contracts/:/app/
+      - contracts:/contracts/
     networks:
       - dev
 
+volumes:
+  contracts:
 
 networks:
   dev:
