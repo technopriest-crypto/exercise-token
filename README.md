@@ -1,5 +1,7 @@
 # exercise-token
 
+![logo](/react-app/src/components/logo.png)
+
 ## Development environment
 
 - Create the data folder:
