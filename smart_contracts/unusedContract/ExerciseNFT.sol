@@ -58,7 +58,6 @@ contract ExerciseNFT is ERC721, VRFConsumerBase {
 
         NFTs.push(
             NFT(strength, speed, stamina, requestToCharacterName[requestId])
-            Character(strength, speed, stamina, requestToCharacterName[requestId])
         );
         _safeMint(requestToSender[requestId], newId);
     }
