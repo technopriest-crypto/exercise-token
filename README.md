@@ -3,7 +3,7 @@
 </h1>
 
 <p align="center">
-  <img src="/react-app/src/components/logo.png" width="200" height="200">
+  <img src="/react-app/src/components/logo.png" width="150" height="150">
 </p>
 
 ## Development environment
