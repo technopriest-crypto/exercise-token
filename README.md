@@ -1,6 +1,6 @@
 # exercise-token
 
-![logo](/react-app/src/components/logo.png)
+![logo](/react-app/src/components/logo.png | width=100)
 
 ## Development environment
 
