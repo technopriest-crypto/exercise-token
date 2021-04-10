@@ -1,5 +1,4 @@
 <div align=”center”>
-  <img src="/react-app/src/components/logo.png" width="100" height="100">
 
   <h1>
     exercise-token
@@ -7,7 +6,10 @@
 </div>
 
 <p align="center">
-  <img width="460" height="300" src="http://www.fillmurray.com/460/300">
+  <img src="/react-app/src/components/logo.png" width="100" height="100">
+  <h1>
+    exercise-token
+  </h1>
 </p>
 
 ## Development environment
