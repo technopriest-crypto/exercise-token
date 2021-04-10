@@ -4,13 +4,16 @@ import React, { Component } from 'react';
 import { Button, Modal, Navbar, Nav, NavDropdown } from "react-bootstrap";
 import { LineChart } from 'react-chartkick'
 import 'chart.js'
-import DarkMode from "./components/DarkMode"
+import DarkMode, { graphColor } from "./components/DarkMode"
+
+import Logo from "./components/logo.png";
 // import { NavigationBar } from './components/NavigationBar';
 // Step data that is displayed on graph
 var steps = {
   "2021-03-16": 2230, "2021-03-17": 12234, "2021-03-18": 5432, "2021-03-19": 6578,
   "2021-03-20": 7898, "2021-03-21": 4200, "2021-03-22": 6942
 };
+// Could use CanvasJS in the future
 
 // Defining the web3 parameters
 let web3 = new Web3(Web3.givenProvider);
@@ -48,11 +51,21 @@ class App extends Component {
 		this.setState({ show: true });
 	}
 
+  graphLight() {
+    this.setState({ graphcolor: 'white' })
+  }
+
+  graphDark() {
+    this.setState({ graphcolor: 'black' })
+  }
+
   constructor(props) {
     super(props)
     this.handleShow = this.handleShow.bind(this);
 		this.handleClose = this.handleClose.bind(this);
-    this.state = { account: '', show: false };
+    {/*this.graphLight = this.graphLight.bind(this);
+    this.graphDark = this.graphDark.bind(this);*/}
+    this.state = { account: '', show: false, graphcolor: ''};
   }
 
   render() {
@@ -61,11 +74,19 @@ class App extends Component {
 
       {/* The NavigationBar */}
       <Navbar bg="dark" variant="dark" expand="lg">
-        <Navbar.Brand href="#home">Exercise Token</Navbar.Brand>
+        <Navbar.Brand href="#home">
+          <img
+            alt="logo"
+            src={Logo}
+            width="30"
+            height="30"
+            className="d-inline-block align-top"
+            />{' '}
+        Exercise Token
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
-          <Nav.Link href="#home">About</Nav.Link>
           {/*<NavDropdown title="Dropdown" id="basic-nav-dropdown">
             <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
             <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
@@ -120,11 +141,40 @@ class App extends Component {
 
         <p>Daily Steps</p>
         <LineChart data={steps}
-        dataset={{backgroundColor: 'rgba(48,125,246,1)', borderColor: 'rgba(0,0,0,1)', borderWidth: 2,
-        radius: 4, pointHoverRadius: 10, pointHoverBackgroundColor: 'rgba(48,125,246,1)',
-        hoverBorderColor: 'black', hoverBorderWidth : '2'}}
-        width="70%" height="400px" thousands=","/>
+          dataset={{backgroundColor: 'rgba(48,125,246,1)', borderColor: 'black', borderWidth: 2,
+          radius: 4, pointHoverRadius: 10, pointHoverBackgroundColor: 'rgba(48,125,246,1)',
+          hoverBorderColor: 'black', hoverBorderWidth : '2'}}
+          width="70%" height="400px" thousands=","
+        />
 
+        {/*
+          this.state.graphcolor
+        <Button variant="primary" onClick={this.graphDark}>
+            Graph Dark
+        </Button>
+        <Button variant="primary" onClick={this.graphLight}>
+            Graph Light
+        </Button>
+        */}
+
+        <p>This is the Dynamic NFT</p>
+
+        <svg width="100" height="250" version="1.1" xmlns="http://www.w3.org/2000/svg">
+          {/* head */}
+          <circle cx="50" cy="50" r="20" stroke="black" fill="transparent" stroke-width="5"/>
+
+          {/* body */}
+          <line x1="50" x2="50" y1="70" y2="150" stroke="black" stroke-width="5"/>
+
+          {/* legs */}
+          <line x1="50" x2="100" y1="150" y2="200" stroke="black" stroke-width="5"/>
+          <line x1="50" x2="0" y1="150" y2="200" stroke="black" stroke-width="5"/>
+
+          {/* arms */}
+          <line x1="50" x2="100" y1="100" y2="100" stroke="black" stroke-width="5"/>
+          <line x1="50" x2="0" y1="100" y2="100" stroke="black" stroke-width="5"/>
+
+        </svg>
       </header>
     </div>
     );

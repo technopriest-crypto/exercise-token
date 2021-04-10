@@ -1,4 +1,10 @@
-# exercise-token
+<h1 align="center">
+  exercise-token
+</h1>
+
+<p align="center">
+  <img src="/react-app/src/components/logo.png" width="150" height="150">
+</p>
 
 ## Development environment
 
@@ -119,7 +125,10 @@
       }
       ```
 
-      Set the env var for the job just created using the jobid from your web interface: `export CLNODE_JOBID=YOUR_JOB_ID`
+      - Set the env var for the job just created using the jobid from your web interface:
+      `export CLNODE_JOBID=702f88cdcb1f417994922327b3e84fb1`
+
+      - Set the env var for the job just created using the jobid from your web interface: `export CLNODE_JOBID=YOUR_JOB_ID`
 
 
 - Deploy the token contract:
@@ -141,8 +150,6 @@
 
   `brownie run scripts/06_add_minter.py --network kovan`
 
-- run
+- Get the address and abi:
 
   `brownie run scripts/99_exercise_token_claim_abi.py --network kovan`
-
-  to get the address and abi
