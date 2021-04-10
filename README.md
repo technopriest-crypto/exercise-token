@@ -1,15 +1,9 @@
-<div align=”center”>
-
-  <h1>
-    exercise-token
-  </h1>
-</div>
+<h1 align="center">
+  exercise-token
+</h1>
 
 <p align="center">
   <img src="/react-app/src/components/logo.png" width="100" height="100">
-  <h1>
-    exercise-token
-  </h1>
 </p>
 
 ## Development environment
