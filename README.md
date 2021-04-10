@@ -1,6 +1,8 @@
-# exercise-token
+<img align="center" src="/react-app/src/components/logo.png" width="100" height="100">
 
-<img src="/react-app/src/components/logo.png" width="100" height="100">
+<h1 align="center">
+  exercise-token
+</h1>
 
 ## Development environment
 
