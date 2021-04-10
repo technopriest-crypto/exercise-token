@@ -150,8 +150,6 @@
 
   `brownie run scripts/06_add_minter.py --network kovan`
 
-- run
+- Get the address and abi:
 
   `brownie run scripts/99_exercise_token_claim_abi.py --network kovan`
-
-  to get the address and abi
