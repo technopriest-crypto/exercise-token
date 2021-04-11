@@ -22,11 +22,16 @@
 
 ## Inspiration & Why CHAINLINK is needed here
 
+## Ambitions for the future (ToDo)
+
 ## Prerequisites
 
 - This repo forked or cloned
 - [Docker](https://www.docker.com/) installed
 - An ETH crypto wallet like [MetaMask](https://metamask.io/) installed
+    - Set to the Kovan network
+    - The wallet funded with ETH, I used this [Gitter chat](https://gitter.im/kovan-testnet/faucet)
+    - The wallet funded with LINK tokens, by following [this guide](https://docs.chain.link/docs/acquire-link)
 - Create an [Infura](https://infura.io/) project
     - Obtain the **Web3 Infura Project ID** and the **ETH Url**
 - Create a [Google OAuth](https://developers.google.com/identity/protocols/oauth2) project
@@ -87,7 +92,7 @@
   Run a shell in the container: `docker exec -it smart_contracts /bin/bash`
 
   Install brownie: `pip install eth-brownie`
-  
+
   Set your chainlink node address: `export CLNODE_ADDRESS='0x9c9361F06180EE1F6A554886e31Bd9383652c92F'`
 
   *Important* install the dependencies manually:
@@ -167,8 +172,6 @@
   and add chainlink funds to the claim contract:
 
   `brownie run scripts/05_fund_chainlink_api.py --network kovan`
-
-  *Note:* Your wallet needs to have LINK tokens, which can be added by following [this guide](https://docs.chain.link/docs/acquire-link)
 
 - Add the current claim contract as minter of our token:
 
