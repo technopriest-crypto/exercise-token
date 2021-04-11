@@ -27,8 +27,7 @@ contract ExerciseTokenClaim is ChainlinkClient, Ownable {
         string memory _jobId,
         uint256 _fee,
         address _link,
-        // ExerciseToken _token
-        address _token
+        ExerciseToken _token // address _token
     ) public {
         if (_link == address(0)) {
             setPublicChainlinkToken();
@@ -38,8 +37,8 @@ contract ExerciseTokenClaim is ChainlinkClient, Ownable {
         oracle = _oracle;
         jobId = stringToBytes32(_jobId);
         fee = _fee;
-        exercise_token = IERC20(_token);
-        // exercise_token = _token;
+        // exercise_token = IERC20(_token);
+        exercise_token = _token;
     }
 
     function claimTokens() public {
