@@ -20,7 +20,7 @@
   </a>
 </p>
 
-## Inspiration & Why CHAINLINK is needed here
+## Inspiration
 
 ## Prerequisites
 
