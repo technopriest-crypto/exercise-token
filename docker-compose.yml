@@ -100,7 +100,7 @@ services:
     working_dir: /app
     environment:
       - "PRIVATE_KEY=${PRIVATE_KEY}"
-      - "WEB3_INFURA_PROJECT_ID=${WEB3_INFURA_PROJECT_ID}"
+      - WEB3_INFURA_PROJECT_ID=8cefcaa06dad492f8e954e9a1d9b16d9
     volumes:
       - ./smart_contracts/:/app/
       - contracts:/contracts/

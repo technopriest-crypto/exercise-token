@@ -39,7 +39,7 @@ fp_exercise_token_claim = os.path.join(contracts_folder, "exercise_token_claim.t
 exercise_token = (toml.load(fp_exercise_token)
     if os.path.exists(fp_exercise_token)
     else {})
-    
+
 exercise_token_claim = (toml.load(fp_exercise_token_claim)
     if os.path.exists(fp_exercise_token_claim)
     else {})
