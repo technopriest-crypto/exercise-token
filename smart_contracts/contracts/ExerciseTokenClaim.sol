@@ -18,6 +18,9 @@ contract ExerciseTokenClaim is ChainlinkClient, Ownable {
     ExerciseToken private exercise_token;
 
     mapping(bytes32 => address) private jobRequests;
+    mapping(address => uint256) public steps;
+
+    address public currentClaimAddress;
 
     constructor(
         address _oracle,
@@ -34,7 +37,7 @@ contract ExerciseTokenClaim is ChainlinkClient, Ownable {
         oracle = _oracle;
         jobId = stringToBytes32(_jobId);
         fee = _fee;
-        exercise_token = _token;
+        exercise_token = IERC20(_token);
     }
 
     function claimTokens() public {
@@ -48,6 +51,17 @@ contract ExerciseTokenClaim is ChainlinkClient, Ownable {
 
         bytes32 requestId = sendChainlinkRequestTo(oracle, req, fee);
         jobRequests[requestId] = msg.sender;
+        currentClaimAddress = msg.sender;
+    }
+
+    function fulfillSteps(bytes32 _requestId, uint256 _steps)
+        public
+        recordChainlinkFulfillment(_requestId)
+    {
+        steps[currentClaimAddress] += _steps;
+        //TODO
+        // exercise_token.mint(jobRequests[_requestId], _steps);
+        exercise_token.mint(currentClaimAddress, _steps);
     }
 
     function setOracle(address _oracle) public onlyOwner {
@@ -56,14 +70,6 @@ contract ExerciseTokenClaim is ChainlinkClient, Ownable {
 
     function setJobId(string memory _jobId) public onlyOwner {
         jobId = stringToBytes32(_jobId);
-    }
-
-    function fulfillSteps(bytes32 _requestId, uint256 _steps)
-        public
-        recordChainlinkFulfillment(_requestId)
-    {
-        //TODO 
-        exercise_token.mint(jobRequests[_requestId], _steps);
     }
 
     function stringToBytes32(string memory source)
