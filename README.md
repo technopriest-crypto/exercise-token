@@ -12,12 +12,13 @@
 - [Docker](https://www.docker.com/) installed
 - An ETH crypto wallet like [MetaMask](https://metamask.io/) installed
 
-## Development environment
+## Getting Started
+
+Setting up the development environment
 
 - Create the data folder:
 
   `mkdir data && mkdir data/chainlink-kovan`
-
 
 - Add `api` and `password` files:
 
