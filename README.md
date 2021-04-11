@@ -6,9 +6,9 @@
   <img src="/react-app/src/components/logo.png" width="150" height="150">
 </p>
 
-<h1 align="center">
+<h3 align="center">
   <em>ETKN</em>
-</h1>
+</h3>
 
 <p align="center">
   A fool-proof, and impactful way to incentivize exercise using ChainLink Oracles and the power of smart contracts!
