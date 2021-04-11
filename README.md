@@ -184,7 +184,7 @@
 
   `brownie run scripts/04_deploy_exercise_token_claim.py --network kovan`
 
-  and add chainlink funds to the claim contract:
+- Fund the ChainLink oracle contract:
 
   `brownie run scripts/05_fund_chainlink_api.py --network kovan`
 
