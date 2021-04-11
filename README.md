@@ -22,6 +22,8 @@
 
 ## Inspiration
 
+This started out as an entry for the Spring 2021 ChainLink hackathon. 
+
 ## Prerequisites
 
 - This repo forked or cloned
