@@ -1,10 +1,12 @@
 <h1 align="center">
-  exercise-token
+  exercise-token (ETKN)
 </h1>
 
 <p align="center">
   <img src="/react-app/src/components/logo.png" width="150" height="150">
 </p>
+
+## Inspiration & Why CHAINLINK is needed here
 
 ## Prerequisites
 
