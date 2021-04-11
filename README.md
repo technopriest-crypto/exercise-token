@@ -34,7 +34,7 @@
 
 ## Getting Started
 
-Setting up the development environment
+*I know it's pretty intimidating*
 
 - Create the data folder:
 
