@@ -91,7 +91,7 @@ This project started out as an entry for the Spring 2021 ChainLink hackathon.
 
     - Visit the React App at [localhost:3000](http://localhost:3000/)
 
-- Deploy the smart contracts:
+- Install and configure brownie in a docker container:
 
     - Run a shell in the smart contract dev container:
 
@@ -110,6 +110,8 @@ This project started out as an entry for the Spring 2021 ChainLink hackathon.
     ```
     brownie pm install OpenZeppelin/openzeppelin-contracts@3.0.0 && brownie pm install alphachainio/chainlink-contracts@1.1.2
     ```
+
+- Start deploying the smart contracts:
 
     - Deploy the oracle contract:
 
