@@ -10,7 +10,7 @@
 
 - This repo forked or cloned
 - [Docker](https://www.docker.com/) installed
-- An ETH crypto wallet like (MetaMask)[https://metamask.io/] installed
+- An ETH crypto wallet like [MetaMask](https://metamask.io/) installed
 
 ## Development environment
 
