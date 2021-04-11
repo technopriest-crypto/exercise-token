@@ -3,6 +3,9 @@ pragma solidity ^0.6.6;
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@chainlink/contracts/src/v0.6/VRFConsumerBase.sol";
 
+// import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v3.0.0/contracts/token/ERC721/ERC721.sol";
+// import "https://github.com/smartcontractkit/chainlink/blob/master/evm-contracts/src/v0.6/VRFConsumerBase.sol";
+
 contract ExerciseNFT is ERC721, VRFConsumerBase {
     bytes32 public keyHash;
     address public vrfCoordinator;
@@ -52,16 +55,14 @@ contract ExerciseNFT is ERC721, VRFConsumerBase {
         override
     {
         uint256 newId = NFTs.length;
-        uint256 strength = (randomNumber % 100);
+        // uint256 strength = (randomNumber % 100);
         uint256 speed = ((randomNumber % 10000) / 100);
+        //todo stamina => steps
+        // uint256 steps = ??
         uint256 stamina = ((randomNumber % 1000000) / 10000);
 
         NFTs.push(
-<<<<<<< HEAD
             NFT(strength, speed, stamina, requestToCharacterName[requestId])
-=======
-            Character(strength, speed, stamina, requestToCharacterName[requestId])
->>>>>>> da67d6442a076c87b341e18c097c805d14a4e655
         );
         _safeMint(requestToSender[requestId], newId);
     }
