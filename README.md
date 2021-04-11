@@ -77,48 +77,48 @@ This project started out as an entry for the Spring 2021 ChainLink hackathon.
 
 - To run the React App:
 
-  Enter into the react-app directory:
+    - Enter into the react-app directory:
 
-  `cd react-app`
+    `cd react-app`
 
-  Build the React App:
+    - Build the React App:
 
-  `docker build --tag react-app .`
+    `docker build --tag react-app .`
 
-  Run the React App on port 3000 using npm run start:
+    - Run the React App on port 3000 using npm run start:
 
-  `docker run -p 3000:3000 react-app npm run start sleep 30`
+    `docker run -p 3000:3000 react-app npm run start sleep 30`
 
-  Visit the React App at [localhost:3000](http://localhost:3000/)
+    - Visit the React App at [localhost:3000](http://localhost:3000/)
 
-- In the smart contract dev container:
+- Deploy the smart contracts:
 
-  Run a shell in the container:
+    - Run a shell in the smart contract dev container:
 
-  `docker exec -it smart_contracts /bin/bash`
+    `docker exec -it smart_contracts /bin/bash`
 
-  Install brownie:
+    - Install brownie:
 
-  `pip install eth-brownie`
+    `pip install eth-brownie`
 
-  Set your chainlink node address:
+    - Set your chainlink node address:
 
-  `export CLNODE_ADDRESS='0x9c9361F06180EE1F6A554886e31Bd9383652c92F'`
+    `export CLNODE_ADDRESS='0x9c9361F06180EE1F6A554886e31Bd9383652c92F'`
 
-  *Important* install the dependencies manually:
+    - *Important* install the dependencies manually:
 
-  ```
-  brownie pm install OpenZeppelin/openzeppelin-contracts@3.0.0 && brownie pm install alphachainio/chainlink-contracts@1.1.2
-  ```
+    ```
+    brownie pm install OpenZeppelin/openzeppelin-contracts@3.0.0 && brownie pm install alphachainio/chainlink-contracts@1.1.2
+    ```
 
-  Deploy the oracle contract:
+    - Deploy the oracle contract:
 
-  `brownie run scripts/01_deploy_oracle.py --network kovan`
+    `brownie run scripts/01_deploy_oracle.py --network kovan`
 
 
-- Add your node to the chainlink oracle contract by calling the **setFulfillmentPermission** function of the oracle contract:
+    - Add your node to the chainlink oracle contract by calling the **setFulfillmentPermission** function of the oracle contract:
 
-  `brownie run scripts/02_set_fulfillment_permissions.py --network kovan`
+    `brownie run scripts/02_set_fulfillment_permissions.py --network kovan`
 
 
 - Now, on the Chainlink node create a bridge and a job by logging onto [localhost:6688](http://localhost:6688/):
