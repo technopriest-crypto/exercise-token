@@ -107,9 +107,7 @@ This project started out as an entry for the Spring 2021 ChainLink hackathon.
 
     - *Important* install the dependencies manually:
 
-    ```
-    brownie pm install OpenZeppelin/openzeppelin-contracts@3.0.0 && brownie pm install alphachainio/chainlink-contracts@1.1.2
-    ```
+    `brownie pm install OpenZeppelin/openzeppelin-contracts@3.0.0 && brownie pm install alphachainio/chainlink-contracts@1.1.2`
 
 - Start deploying the smart contracts:
 
