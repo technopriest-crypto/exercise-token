@@ -7,7 +7,7 @@
 </p>
 
 <h1 align="center">
-  ETKN
+  <em>ETKN</em>
 </h1>
 
 <p align="center">
