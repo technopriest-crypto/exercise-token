@@ -11,7 +11,7 @@
 </h1>
 
 <p align="center">
-  A fool-proof, impactful way to incentivize exercise.
+  A fool-proof, and impactful way to incentivize exercise using ChainLink Oracles and the power of smart contracts!
 </p>
 
 ## Inspiration & Why CHAINLINK is needed here
