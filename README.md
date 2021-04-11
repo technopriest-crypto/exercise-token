@@ -6,9 +6,9 @@
   <img src="/react-app/src/components/logo.png" width="150" height="150">
 </p>
 
-<h2 align="center">
+<h1 align="center">
   ETKN
-</h2>
+</h1>
 
 ## Inspiration & Why CHAINLINK is needed here
 
