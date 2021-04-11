@@ -34,7 +34,7 @@
 
 ## Getting Started
 
-*I know it's pretty intimidating*, but trust us, you'll figure it out!
+*We know it's pretty intimidating*, but trust us, you'll figure it out!
 
 - Create the data folder:
 
