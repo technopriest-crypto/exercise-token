@@ -22,9 +22,9 @@
 
 ## Inspiration & Why CHAINLINK is needed here
 
-## To do in the future
+## To do
 
-- [ ] Figure out the smart contract errors and the oracle issue
+- [ ] **Actually make it functional:** figure out the smart contract errors and the oracle issue
 - [ ] Have the the token issued so 1 step = 1 *ETKN*
 - [ ] Figure out a smart way to reward other types of exercise dependent on personal goals
 - [ ] Integrate it with the React-App instead of the horrendous pure HTML
@@ -96,11 +96,17 @@
 
 - In the smart contract dev container:
 
-  Run a shell in the container: `docker exec -it smart_contracts /bin/bash`
+  Run a shell in the container:
 
-  Install brownie: `pip install eth-brownie`
+  `docker exec -it smart_contracts /bin/bash`
 
-  Set your chainlink node address: `export CLNODE_ADDRESS='0x9c9361F06180EE1F6A554886e31Bd9383652c92F'`
+  Install brownie:
+
+  `pip install eth-brownie`
+
+  Set your chainlink node address:
+
+  `export CLNODE_ADDRESS='0x9c9361F06180EE1F6A554886e31Bd9383652c92F'`
 
   *Important* install the dependencies manually:
 
@@ -108,14 +114,14 @@
   brownie pm install OpenZeppelin/openzeppelin-contracts@3.0.0 && brownie pm install alphachainio/chainlink-contracts@1.1.2
   ```
 
-  Deploy the oracle contract: `brownie run scripts/01_deploy_oracle.py --network kovan`
+  Deploy the oracle contract:
+
+  `brownie run scripts/01_deploy_oracle.py --network kovan`
 
 
 - Add your node to the chainlink oracle contract by calling the **setFulfillmentPermission** function of the oracle contract:
 
   `brownie run scripts/02_set_fulfillment_permissions.py --network kovan`
-
-  make sure the **CLNODE_ADDRESS** env var is correctly set to your node.
 
 
 - Now, on the Chainlink node create a bridge and a job by logging onto [localhost:6688](http://localhost:6688/):
@@ -165,7 +171,9 @@
       }
       ```
 
-      - Set the env var for the job just created using the jobid from your web interface: `export CLNODE_JOBID=YOUR_JOB_ID`
+      - Set the env var for the job just created using the jobid from your web interface:
+
+      `export CLNODE_JOBID=YOUR_JOB_ID`
 
 
 - Deploy the token contract:
