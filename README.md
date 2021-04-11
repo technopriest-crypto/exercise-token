@@ -22,7 +22,14 @@
 
 ## Inspiration & Why CHAINLINK is needed here
 
-## Ambitions for the future (ToDo)
+## To do in the future
+
+- [ ] Figure out the smart contract errors and the oracle issue
+- [ ] Have the the token issued so 1 step = 1 *ETKN*
+- [ ] Figure out a smart way to reward other types of exercise dependent on personal goals
+- [ ] Integrate it with the React-App instead of the horrendous pure HTML
+- [ ] Dynamic NFTs that can be purchased with the tokens, and depend on the steps from the ChainLink oracle as well as a ChainLink VRF.
+- [ ] Deploy on mainnet!
 
 ## Prerequisites
 
