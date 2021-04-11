@@ -27,14 +27,14 @@
 - This repo forked or cloned
 - [Docker](https://www.docker.com/) installed
 - An ETH crypto wallet like [MetaMask](https://metamask.io/) installed
-- Created an [Infura](https://infura.io/) project
+- Create an [Infura](https://infura.io/) project
     - Obtain the **Web3 Infura Project ID** and the **ETH Url**
 - Create a [Google OAuth](https://developers.google.com/identity/protocols/oauth2) project
     - Obtain the **OAuth Client ID** and the **OAuth Client Secret**
 
 ## Getting Started
 
-*I know it's pretty intimidating*
+*I know it's pretty intimidating*, but trust us, you'll figure it out!
 
 - Create the data folder:
 
@@ -61,7 +61,6 @@
     OAUTH_CLIENT_SECRET=[google api client secret]
     PRIVATE_KEY=[a wallet private key with kovan eth. to be used to deploy the smart contracts]
     ```
-
 
 - Start the docker containers:
 
@@ -99,11 +98,8 @@
   brownie pm install OpenZeppelin/openzeppelin-contracts@3.0.0 && brownie pm install alphachainio/chainlink-contracts@1.1.2
   ```
 
-  Deploy contract:
+  Deploy the oracle contract: `brownie run scripts/01_deploy_oracle.py --network kovan`
 
-    ```
-    brownie run scripts/01_deploy_oracle.py --network kovan
-    ```
 
 - Add your node to the chainlink oracle contract by calling the **setFulfillmentPermission** function of the oracle contract:
 
