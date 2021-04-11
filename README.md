@@ -22,11 +22,11 @@
 
 ## Disclaimer
 
-This project currently does not work as intended. 
+This project currently does not work as intended.
 
 ## Inspiration
 
-This started out as an entry for the Spring 2021 ChainLink hackathon.
+This project started out as an entry for the Spring 2021 ChainLink hackathon.
 
 ## Prerequisites
 
