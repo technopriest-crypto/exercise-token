@@ -21,20 +21,22 @@
   echo "password123" > ./data/chainlink-kovan/password
   ```
 
-- Create Network `docker network create dev`
+- Create the development network for docker: `docker network create dev`
 
-- create a file named `.env` in the root of the project with:
+- Create a file named `.env` in the root of the project: `touch .env`
 
-  ```
-  WEB3_INFURA_PROJECT_ID=[the infura project id]
-  ETH_URL=[the url given by infura. should start with wss://...]
-  OAUTH_CLIENT_ID=[google api client id]
-  OAUTH_CLIENT_SECRET=[google api client secret]
-  PRIVATE_KEY=[a wallet private key with kovan eth. to be used to deploy the smart contracts]
-  ```
+    - Set the following environment variables in the `.env`
+
+    ```
+    WEB3_INFURA_PROJECT_ID=[the infura project id]
+    ETH_URL=[the url given by infura. should start with wss://...]
+    OAUTH_CLIENT_ID=[google api client id]
+    OAUTH_CLIENT_SECRET=[google api client secret]
+    PRIVATE_KEY=[a wallet private key with kovan eth. to be used to deploy the smart contracts]
+    ```
 
 
-- Run the `docker-compose` with the command :
+- Start the docker containers:
 
   `docker-compose up -d`
 
@@ -131,16 +133,12 @@
       }
       ```
 
-      - Set the env var for the job just created using the jobid from your web interface:
-      `export CLNODE_JOBID=702f88cdcb1f417994922327b3e84fb1`
-
       - Set the env var for the job just created using the jobid from your web interface: `export CLNODE_JOBID=YOUR_JOB_ID`
 
 
 - Deploy the token contract:
 
   `brownie run scripts/03_deploy_exercise_token.py --network kovan`
-
 
 - Deploy the token contract:
 
@@ -156,6 +154,10 @@
 
   `brownie run scripts/06_add_minter.py --network kovan`
 
-- Get the address and abi:
+- Get the address of the **exercise_token** smart contract:
+
+  `brownie run scripts/98_exercise_token_abi.py --network kovan`
+
+- Get the address of the **exercise_token_claim** smart contract:
 
   `brownie run scripts/99_exercise_token_claim_abi.py --network kovan`
