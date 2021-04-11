@@ -3,7 +3,7 @@
 </h1>
 
 <p align="center">
-  <img src="/react-app/src/components/logo.gif" width="150" height="150">
+  <img src="/react-app/src/components/logo.gif" width="225" height="150">
 </p>
 
 <h3 align="center">
