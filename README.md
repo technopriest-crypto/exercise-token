@@ -11,7 +11,7 @@
 </h3>
 
 <p align="center">
-  Exercise Token (ETKN), is a fool-proof, and impactful way to incentivize exercise using ChainLink Oracles and the power of smart contracts!
+  Exercise Token (<em>ETKN</em>), is a fool-proof, and impactful way to incentivize exercise using ChainLink Oracles and the power of smart contracts!
 </p>
 
 <p align="center">
