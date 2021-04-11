@@ -11,7 +11,13 @@
 </h3>
 
 <p align="center">
-  A fool-proof, and impactful way to incentivize exercise using ChainLink Oracles and the power of smart contracts!
+  Exercise Token (ETKN), is a fool-proof, and impactful way to incentivize exercise using ChainLink Oracles and the power of smart contracts!
+</p>
+
+<p align="center">
+  <a href="https://github.com/technopriest-crypto/exercise-token/blob/main/LICENSE">
+    <img alt="MIT license" src="https://img.shields.io/github/license/technopriest-crypto/exercise-token">
+  </a>
 </p>
 
 ## Inspiration & Why CHAINLINK is needed here
