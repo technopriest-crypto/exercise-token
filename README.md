@@ -6,14 +6,41 @@
   <img src="/react-app/src/components/logo.png" width="150" height="150">
 </p>
 
-## Development environment
+<h3 align="center">
+  <em>ETKN</em>
+</h3>
+
+<p align="center">
+  Exercise Token (<em>ETKN</em>) is a fool-proof and impactful way to incentivize healthy habits using ChainLink Oracles and the power of smart contracts!
+</p>
+
+<p align="center">
+  <a href="https://github.com/technopriest-crypto/exercise-token/blob/main/LICENSE">
+    <img alt="MIT license" src="https://img.shields.io/github/license/technopriest-crypto/exercise-token">
+  </a>
+</p>
+
+## Inspiration & Why CHAINLINK is needed here
+
+## Prerequisites
+
+- This repo forked or cloned
+- [Docker](https://www.docker.com/) installed
+- An ETH crypto wallet like [MetaMask](https://metamask.io/) installed
+- Created an [Infura](https://infura.io/) project
+    - Obtain the **Web3 Infura Project ID** and the **ETH Url**
+- Create a [Google OAuth](https://developers.google.com/identity/protocols/oauth2) project
+    - Obtain the **OAuth Client ID** and the **OAuth Client Secret**
+
+## Getting Started
+
+*I know it's pretty intimidating*
 
 - Create the data folder:
 
   `mkdir data && mkdir data/chainlink-kovan`
 
-
-- Add `api` and `password` files:
+- Add **api** and **password** files with the chainlink node info:
 
   ```
   echo "technopriest@gmx.us" > ./data/chainlink-kovan/api
@@ -21,20 +48,22 @@
   echo "password123" > ./data/chainlink-kovan/password
   ```
 
-- Create Network `docker network create dev`
+- Create the development network for docker: `docker network create dev`
 
-- create a file named `.env` in the root of the project with:
+- Create a file named **.env** in the root of the project: `touch .env`
 
-  ```
-  WEB3_INFURA_PROJECT_ID=[the infura project id]
-  ETH_URL=[the url given by infura. should start with wss://...]
-  OAUTH_CLIENT_ID=[google api client id]
-  OAUTH_CLIENT_SECRET=[google api client secret]
-  PRIVATE_KEY=[a wallet private key with kovan eth. to be used to deploy the smart contracts]
-  ```
+    - Set the following environment variables in the **.env**
+
+    ```
+    WEB3_INFURA_PROJECT_ID=[the infura project id]
+    ETH_URL=[the url given by infura. should start with wss://...]
+    OAUTH_CLIENT_ID=[google api client id]
+    OAUTH_CLIENT_SECRET=[google api client secret]
+    PRIVATE_KEY=[a wallet private key with kovan eth. to be used to deploy the smart contracts]
+    ```
 
 
-- Run the `docker-compose` with the command :
+- Start the docker containers:
 
   `docker-compose up -d`
 
@@ -56,8 +85,7 @@
 
 - In the smart contract dev container:
 
-  Run a shell in the container:
-  `docker exec -it smart_contracts /bin/bash`
+  Run a shell in the container: `docker exec -it smart_contracts /bin/bash`
 
   Install brownie: `pip install eth-brownie`
 
@@ -77,11 +105,11 @@
     brownie run scripts/01_deploy_oracle.py --network kovan
     ```
 
-- Add your node to the chainlink oracle contract by calling the `setFulfillmentPermission` function of the oracle contract:
+- Add your node to the chainlink oracle contract by calling the **setFulfillmentPermission** function of the oracle contract:
 
   `brownie run scripts/02_set_fulfillment_permissions.py --network kovan`
 
-  make sure the `CLNODE_ADDRESS` env var is correctly set to your node.
+  make sure the **CLNODE_ADDRESS** env var is correctly set to your node.
 
 
 - Now, on the Chainlink node create a bridge and a job:
@@ -131,16 +159,12 @@
       }
       ```
 
-      - Set the env var for the job just created using the jobid from your web interface:
-      `export CLNODE_JOBID=702f88cdcb1f417994922327b3e84fb1`
-
       - Set the env var for the job just created using the jobid from your web interface: `export CLNODE_JOBID=YOUR_JOB_ID`
 
 
 - Deploy the token contract:
 
   `brownie run scripts/03_deploy_exercise_token.py --network kovan`
-
 
 - Deploy the token contract:
 
@@ -156,6 +180,10 @@
 
   `brownie run scripts/06_add_minter.py --network kovan`
 
-- Get the address and abi:
+- Get the address of the **exercise_token** smart contract:
+
+  `brownie run scripts/98_exercise_token_abi.py --network kovan`
+
+- Get the address of the **exercise_token_claim** smart contract:
 
   `brownie run scripts/99_exercise_token_claim_abi.py --network kovan`
