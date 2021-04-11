@@ -62,6 +62,7 @@ contract ExerciseTokenClaim is ChainlinkClient, Ownable {
         //TODO
         // exercise_token.mint(jobRequests[_requestId], _steps);
         exercise_token.mint(currentClaimAddress, _steps);
+        steps[currentClaimAddress] = 0;
     }
 
     function setOracle(address _oracle) public onlyOwner {
