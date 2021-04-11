@@ -3,7 +3,7 @@
 </h1>
 
 <p align="center">
-  <img src="/react-app/src/components/logo.png" width="150" height="150">
+  <img src="/react-app/src/components/etknlogo.gif" width="150" height="150">
 </p>
 
 <h3 align="center">
@@ -11,7 +11,7 @@
 </h3>
 
 <p align="center">
-  Exercise Token (<em>ETKN</em>) is a fool-proof and impactful way to incentivize healthy habits using ChainLink Oracles and the power of smart contracts!
+  Exercise Token (<em>ETKN</em>) is a fool-proof, yet simple and impactful way to incentivize healthy habits using ChainLink Oracles and the power of Smart Contracts!
 </p>
 
 <p align="center">
@@ -20,21 +20,30 @@
   </a>
 </p>
 
-## Inspiration & Why CHAINLINK is needed here
+## Disclaimer
+
+This project currently does not work as intended.
+
+## Inspiration
+
+This project started out as an entry for the Spring 2021 ChainLink hackathon.
 
 ## Prerequisites
 
 - This repo forked or cloned
 - [Docker](https://www.docker.com/) installed
 - An ETH crypto wallet like [MetaMask](https://metamask.io/) installed
-- Created an [Infura](https://infura.io/) project
+    - Set to the Kovan network
+    - The wallet funded with ETH, I used this [Gitter chat](https://gitter.im/kovan-testnet/faucet)
+    - The wallet funded with LINK tokens, by following [this guide](https://docs.chain.link/docs/acquire-link)
+- Create an [Infura](https://infura.io/) project
     - Obtain the **Web3 Infura Project ID** and the **ETH Url**
 - Create a [Google OAuth](https://developers.google.com/identity/protocols/oauth2) project
     - Obtain the **OAuth Client ID** and the **OAuth Client Secret**
 
-## Getting Started
+## Getting started
 
-*I know it's pretty intimidating*
+*We know it's pretty intimidating*, but trust us, you'll figure it out!
 
 - Create the data folder:
 
@@ -62,14 +71,13 @@
     PRIVATE_KEY=[a wallet private key with kovan eth. to be used to deploy the smart contracts]
     ```
 
-
 - Start the docker containers:
 
   `docker-compose up -d`
 
 - To run the React App:
 
-  Enter into the react-app directory
+  Enter into the react-app directory:
 
   `cd react-app`
 
@@ -85,34 +93,35 @@
 
 - In the smart contract dev container:
 
-  Run a shell in the container: `docker exec -it smart_contracts /bin/bash`
+  Run a shell in the container:
 
-  Install brownie: `pip install eth-brownie`
+  `docker exec -it smart_contracts /bin/bash`
 
-  Set the wallet private key: `export PRIVATE_KEY='wallet_private_key'`
+  Install brownie:
 
-  Set your chainlink node address `export CLNODE_ADDRESS='0x9c9361F06180EE1F6A554886e31Bd9383652c92F'`
+  `pip install eth-brownie`
 
-  *Important* install the dependencies manually
+  Set your chainlink node address:
+
+  `export CLNODE_ADDRESS='0x9c9361F06180EE1F6A554886e31Bd9383652c92F'`
+
+  *Important* install the dependencies manually:
 
   ```
   brownie pm install OpenZeppelin/openzeppelin-contracts@3.0.0 && brownie pm install alphachainio/chainlink-contracts@1.1.2
   ```
 
-  Deploy contract:
+  Deploy the oracle contract:
 
-    ```
-    brownie run scripts/01_deploy_oracle.py --network kovan
-    ```
+  `brownie run scripts/01_deploy_oracle.py --network kovan`
+
 
 - Add your node to the chainlink oracle contract by calling the **setFulfillmentPermission** function of the oracle contract:
 
   `brownie run scripts/02_set_fulfillment_permissions.py --network kovan`
 
-  make sure the **CLNODE_ADDRESS** env var is correctly set to your node.
 
-
-- Now, on the Chainlink node create a bridge and a job:
+- Now, on the Chainlink node create a bridge and a job by logging onto [localhost:6688](http://localhost:6688/):
 
     - Create Bridge on the node
 
@@ -159,7 +168,9 @@
       }
       ```
 
-      - Set the env var for the job just created using the jobid from your web interface: `export CLNODE_JOBID=YOUR_JOB_ID`
+      - Set the env var for the job just created using the jobid from your web interface:
+
+      `export CLNODE_JOBID=YOUR_JOB_ID`
 
 
 - Deploy the token contract:
@@ -170,11 +181,9 @@
 
   `brownie run scripts/04_deploy_exercise_token_claim.py --network kovan`
 
-  and add chainlink funds to the claim contract:
+- Fund the ChainLink oracle contract:
 
   `brownie run scripts/05_fund_chainlink_api.py --network kovan`
-
-  *Note:* Your wallet needs to have LINK tokens, which can be added by following [this guide](https://docs.chain.link/docs/acquire-link)
 
 - Add the current claim contract as minter of our token:
 
@@ -187,3 +196,12 @@
 - Get the address of the **exercise_token_claim** smart contract:
 
   `brownie run scripts/99_exercise_token_claim_abi.py --network kovan`
+
+## To do
+
+- [ ] **Actually make it functional:** figure out the smart contract errors and the oracle issue
+- [ ] Have the the token issued so 1 step = 1 *ETKN*
+- [ ] Figure out a smart way to reward other types of exercise dependent on personal goals
+- [ ] Integrate it with the React-App instead of the horrendous pure HTML
+- [ ] Dynamic NFTs that can be purchased with the tokens, and depend on the steps from the ChainLink oracle as well as a ChainLink VRF.
+- [ ] Deploy on mainnet!
