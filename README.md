@@ -28,9 +28,9 @@
 - [Docker](https://www.docker.com/) installed
 - An ETH crypto wallet like [MetaMask](https://metamask.io/) installed
 - Created an [Infura](https://infura.io/) project
-    - Obtain the `Web3 Infura Project ID` and the `ETH Url`
+    - Obtain the **Web3 Infura Project ID** and the **ETH Url**
 - Create a [Google OAuth](https://developers.google.com/identity/protocols/oauth2) project
-    - Obtain the `OAuth Client ID` and the `OAuth Client Secret`
+    - Obtain the **OAuth Client ID** and the **OAuth Client Secret**
 
 ## Getting Started
 
@@ -40,7 +40,7 @@ Setting up the development environment
 
   `mkdir data && mkdir data/chainlink-kovan`
 
-- Add `api` and `password` files:
+- Add **api** and **password** files with the chainlink node info:
 
   ```
   echo "technopriest@gmx.us" > ./data/chainlink-kovan/api
@@ -50,9 +50,9 @@ Setting up the development environment
 
 - Create the development network for docker: `docker network create dev`
 
-- Create a file named `.env` in the root of the project: `touch .env`
+- Create a file named **.env** in the root of the project: `touch .env`
 
-    - Set the following environment variables in the `.env`
+    - Set the following environment variables in the **.env**
 
     ```
     WEB3_INFURA_PROJECT_ID=[the infura project id]
@@ -85,8 +85,7 @@ Setting up the development environment
 
 - In the smart contract dev container:
 
-  Run a shell in the container:
-  `docker exec -it smart_contracts /bin/bash`
+  Run a shell in the container: `docker exec -it smart_contracts /bin/bash`
 
   Install brownie: `pip install eth-brownie`
 
@@ -106,11 +105,11 @@ Setting up the development environment
     brownie run scripts/01_deploy_oracle.py --network kovan
     ```
 
-- Add your node to the chainlink oracle contract by calling the `setFulfillmentPermission` function of the oracle contract:
+- Add your node to the chainlink oracle contract by calling the **setFulfillmentPermission** function of the oracle contract:
 
   `brownie run scripts/02_set_fulfillment_permissions.py --network kovan`
 
-  make sure the `CLNODE_ADDRESS` env var is correctly set to your node.
+  make sure the **CLNODE_ADDRESS** env var is correctly set to your node.
 
 
 - Now, on the Chainlink node create a bridge and a job:
