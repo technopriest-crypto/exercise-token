@@ -35,7 +35,7 @@
 - Create a [Google OAuth](https://developers.google.com/identity/protocols/oauth2) project
     - Obtain the **OAuth Client ID** and the **OAuth Client Secret**
 
-## Getting Started
+## Getting started
 
 *We know it's pretty intimidating*, but trust us, you'll figure it out!
 
