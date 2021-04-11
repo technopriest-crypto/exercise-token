@@ -87,9 +87,7 @@
   Run a shell in the container: `docker exec -it smart_contracts /bin/bash`
 
   Install brownie: `pip install eth-brownie`
-
-  Set the wallet private key: `export PRIVATE_KEY='wallet_private_key'`
-
+  
   Set your chainlink node address: `export CLNODE_ADDRESS='0x9c9361F06180EE1F6A554886e31Bd9383652c92F'`
 
   *Important* install the dependencies manually:
@@ -108,7 +106,7 @@
   make sure the **CLNODE_ADDRESS** env var is correctly set to your node.
 
 
-- Now, on the Chainlink node create a bridge and a job:
+- Now, on the Chainlink node create a bridge and a job by logging onto [localhost:6688](http://localhost:6688/):
 
     - Create Bridge on the node
 
