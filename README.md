@@ -10,6 +10,10 @@
   ETKN
 </h1>
 
+<p align="center">
+  A fool-proof, impactful way to incentivize exercise.
+</p>
+
 ## Inspiration & Why CHAINLINK is needed here
 
 ## Prerequisites
