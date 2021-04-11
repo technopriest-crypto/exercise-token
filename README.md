@@ -6,6 +6,12 @@
   <img src="/react-app/src/components/logo.png" width="150" height="150">
 </p>
 
+## Prerequisites
+
+- This repo forked or cloned
+- [Docker](https://www.docker.com/) installed
+- An ETH crypto wallet like (MetaMask)[https://metamask.io/] installed
+
 ## Development environment
 
 - Create the data folder:
