@@ -68,7 +68,7 @@
 
 - To run the React App:
 
-  Enter into the react-app directory
+  Enter into the react-app directory:
 
   `cd react-app`
 
@@ -90,9 +90,9 @@
 
   Set the wallet private key: `export PRIVATE_KEY='wallet_private_key'`
 
-  Set your chainlink node address `export CLNODE_ADDRESS='0x9c9361F06180EE1F6A554886e31Bd9383652c92F'`
+  Set your chainlink node address: `export CLNODE_ADDRESS='0x9c9361F06180EE1F6A554886e31Bd9383652c92F'`
 
-  *Important* install the dependencies manually
+  *Important* install the dependencies manually:
 
   ```
   brownie pm install OpenZeppelin/openzeppelin-contracts@3.0.0 && brownie pm install alphachainio/chainlink-contracts@1.1.2
