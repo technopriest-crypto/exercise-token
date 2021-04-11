@@ -27,6 +27,10 @@
 - This repo forked or cloned
 - [Docker](https://www.docker.com/) installed
 - An ETH crypto wallet like [MetaMask](https://metamask.io/) installed
+- Created an [Infura](https://infura.io/) project
+    - Obtain the Web3 Infura Project ID and the ETH Url
+- Create a [Google OAuth](https://developers.google.com/identity/protocols/oauth2) project
+    - Obtain the OAuth Client ID and the OAuth Client Secret
 
 ## Getting Started
 
